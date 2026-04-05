@@ -170,7 +170,7 @@ git push -u origin main
    3) Run : num run dev
    4) Run app to checking work fine <http://localhost:3000>: ctrl+click
 
-## Setup frontend files : 10:40-->Require NextJS 14.2.4
+## Setup frontend(Client) files : 10:40-->Require NextJS 14.2.4
 
 ### Setup theme and colors
 
@@ -208,9 +208,7 @@ git push -u origin main
    3) Passing "children" to DashboardWrapper in "div" tag
    4) Delete "type Props" parameter
 
-### Setup navBar
-
-#### Setup navBar as "sideBar"
+### Setup Page layout(Sidebar, Navbar and Dashboard)
 
 1) In {dashboardWrapper.tsx} file add "className" tag
 2) Adding flex and styling in "className" tag
@@ -218,3 +216,32 @@ git push -u origin main
 4) Adding "main" tag then move "children' tag in there
 5) Adding "className" tag in "main" tag and styling
 6) Adding "light" theme in outside "className" tag
+7) Adding "NavBar" tag above "children" tag
+8) Import Navbar from @/app/(components)/Navbar
+9) Create (components) folder in app folder
+10) Create Navbar folder in (components) folder
+11) Create {index.tsx} in Navbar folder
+
+### Setup navBar(Top bar of Page : Burger icon, Search, Theme, Notification, Profile and Setting)
+
+#### Setup Navbar layout
+
+1) In {index.tsx} file use template code : tsrafce
+   1) Delete type Props parameters
+2) Adding "className" tag to styling for layouting navbar in "div" tag
+   <!-- Left side element -->
+3) Create navbar elements on "left side" :
+   1) Create "className" tag to styling for left side element in "div" tag
+   2) Create "Burger button" element and Styling
+      1) Create "className" tag to styling burger button
+      2) Create callBack function as : onClick={() => {}}
+   3) Import Menu icon from  lucide-react
+   4) Install package as : npm i lucide-react@0.407.0
+   ***Error : On NextJs cannot use pass any OnClick function to any server***
+   ***Solve by : Adding "use client"; tag at the top of {index.tsx} file***
+   5) Create "Search bar" element and Styling
+      1) Create "className" tag as : relative
+      2) Create "input" tag then setup "type"as : search
+      3) Place text in search bar with "placeholder" as : Start type to search groups & products
+      4) Create "className" tag to styling search bar tag
+   <!-- Right side element -->
