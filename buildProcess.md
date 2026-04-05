@@ -207,4 +207,14 @@ git push -u origin main
    2) Change "Props" parameter to : children:{children: React.ReactNode}
    3) Passing "children" to DashboardWrapper in "div" tag
    4) Delete "type Props" parameter
-   5) 
+
+### Setup navBar
+
+#### Setup navBar as "sideBar"
+
+1) In {dashboardWrapper.tsx} file add "className" tag
+2) Adding flex and styling in "className" tag
+3) Adding Sidebar text instead of DashboardWrapper text in "div" tag
+4) Adding "main" tag then move "children' tag in there
+5) Adding "className" tag in "main" tag and styling
+6) Adding "light" theme in outside "className" tag
