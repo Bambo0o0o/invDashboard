@@ -1,6 +1,6 @@
 # Build MERN financeDashboard
 
-Last building time : 00:22:33 /07:04:56
+Last building time : 00:39:54 /07:04:56
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
@@ -231,7 +231,7 @@ git push -u origin main
 2) Adding "className" tag to styling for layouting navbar in "div" tag
    <!-- Left side element -->
 3) Create navbar elements on "left side" :
-   1) Create "className" tag to styling for left side element in "div" tag
+   1) Create "className" tag to styling "Left side" element in "div" tag
    2) Create "Burger button" element and Styling
       1) Create "className" tag to styling burger button
       2) Create callBack function as : onClick={() => {}}
@@ -243,5 +243,18 @@ git push -u origin main
       1) Create "className" tag as : relative
       2) Create "input" tag then setup "type"as : search
       3) Place text in search bar with "placeholder" as : Start type to search groups & products
-      4) Create "className" tag to styling search bar tag
+      4) Create "className" tag to styling "Bell" element in search bar
    <!-- Right side element -->
+4) Create "className" tag to styling for "Right side" element in "div" tag : "flex justify-between items-center gap-5"
+5) Create "className" tag to layouting for "Right side" element in "div" tag : "hidden md:flex justify-between items-center gap-5"
+6) Create "Light/Dark" mode with "moon/sun" icon from lucide-react click button as
+   1) Create "div" tag then adding "button" onClick function to toggleDarkMode as : isDarkMode ? (</sun className...>):(</moon className...>), Presently add only "sun" mode
+   2) Create "Sun/Moon" mode button as : <https://lucide.dev/icons/moon>
+7) Create "Notification" with "bell" icon from lucide-react
+   1) Create "className" tag then adding relative
+   2) Create "Bell" icon and "className" tag to styling
+   3) Create "className" tag to add number of Notify by manually and Styling
+8) Create "className" tag for vertical line and space in "hr" tag
+9) Create "className" tag for profile image(Just text now)
+10) Create "className" tag for profile Name
+11) Create "className" tag for setting icon from lucide-react and import Link from next/link
