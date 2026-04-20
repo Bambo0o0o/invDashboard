@@ -1,6 +1,6 @@
 # Build MERN financeDashboard
 
-Last building time : 00:39:54 /07:04:56
+Last building time : 00:55:06 /07:04:56
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
@@ -235,6 +235,7 @@ git push -u origin main
    2) Create "Burger button" element and Styling
       1) Create "className" tag to styling burger button
       2) Create callBack function as : onClick={() => {}}
+      3) Adding "use client" on top of "index.tsx" file to provide activities of "onClick" function
    3) Import Menu icon from  lucide-react
    4) Install package as : npm i lucide-react@0.407.0
    ***Error : On NextJs cannot use pass any OnClick function to any server***
@@ -258,3 +259,71 @@ git push -u origin main
 9) Create "className" tag for profile image(Just text now)
 10) Create "className" tag for profile Name
 11) Create "className" tag for setting icon from lucide-react and import Link from next/link
+
+### Setup sideBar ()
+
+1) Create sidebar folder in (components) folder
+2) Create {index.tsx} in sidebar folder
+3) Used short-key to create template : TSRAFCE
+4) Rename "index" to be : Sidebar
+5) Remove "Props" and its declaired
+6) Go to {dashboardWrapper.tsx} file then adding "Sidebar" tag in "div" tag above "main" tag as : <_Sidebar/>
+7) In {dashboardWrapper.tsx} file import Sidebar from /components/Sidebar
+
+#### Setup sideBar : Top Logo and Name
+
+1) In {index.tsx} in sidebar folder Add "div" tag instead of "Sidebar" text
+2) Create "className" tag to create Top Header layout as : "flex gap-3 justify-between md:justify-normal items-center pt-8"
+3) Insert "div" tag for adding logo in second "div" tag
+4) Insert "h1" tag for "Page-Name" under "div" tag's logo
+5) Create "className" tag to styling "Page-Name" as : "font-extrabold text-2xl"
+6) Adding "Page-Name" as : invStock
+7) Adding "button" tag in second "div" tag
+8) Create "className" tag in "button" tag As : "md:hidden px-3 py-3 bg-gray-100 rounded-full hover:bg-blue-100"
+9) Adding "onClick" function in "button" tag as : onClick={()=>{}}
+10) Adding "Menu" tag in "button" tag
+11) Create "className" tag to styling as : "w-4 h-4"
+12) Adding "use client" on top of "index.tsx" file to provide activities of "onClick" function
+
+#### Setup sideBar : Sidebar List name(Link to each pages)
+
+1) Create "div" tag for "List name" to be create link
+2) Create "className" tag in "div" tag to styling and layout as : "flex-grow mt-8"
+3) Adding simple "Link here" text in "div" tag
+
+#### Setup sideBar : Sidebar footer
+
+1) Create "div" tag for declared Copy right page
+2) Create "p" tag (paragraph tag) as : &copy; 2026 invStock
+3) Create "className" tag in "p" tag to styling and layout as : "text-center text-xs text-gray-500"
+   ***Before make a link for "onClick" we need to setup redux toolkit first then useState to manipulate each actions as : Sidebar collaspe, Dark/Light mode and Setting***
+4) Install react-redux : npm i react-redux @reduxjs/toolkit dotenv redux-persist
+5) Create {.env.local} file in client folder to provide URL that run on our local machine
+   1) Setup URL as : NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
+6) Create {redux.tsx} file in app folder
+   1) Copy code from EdRoh file to our {redux.tsx} file (52:15)
+   ***This {redux.tsx} file is setup for NextJS and Used to store data from different session on local***
+   ***What we will used {redux.tsx} file on our web page : ***
+   <!--  1) REDUX PERSISTENCE, It's used to setup local storage
+         2) All of this setup file come from "Redux-Toolkit.JS document
+      -->
+
+7) Create "state" folder in "src" folder
+8) Create {index.ts} file in "state" folder
+   1) Import createSlice and PayloadAction from reduxjs/toolkit
+   2) Export InitialStateTypes as : isSidebarCollapsed and isDarkMode
+   3) Create variable as initialState as InitialStateTypes and setup : isSidebarCollapsed and isDarkMode as false
+   4) Export globalSlice as : name, initialState, reducers as isSidebarCollapsed and isDarkMode
+   5) Export variable setIsSidebarCollasped and setIsDarkMode as : globalSlice.actions
+   6) Export default globalSlice.reducer
+9) Create {api.ts} file in "state" folder
+   1) Import createApi and fetchBaseQuery from /reduxjs/toolkit/query/react
+   2) Export schemas as :
+      1) Product with : productId, name, price, rating, stockQuantity
+      2) NewProduct with : name, price, rating, stockQuantity
+      3) SalesSummary with : salesSummaryId, totalValue, changePercentage, date
+      4) ...
+      5) ...
+      6) User with : userId, name, email
+   3) Create api function to callBack each schemas as : "DashboardMetrics", "Products", "Users", "Expenses"
+   4) Export variables {useGetDashboardMetricsQuery, useGetProductsQuery, useCreateProductMutation,useGetUsersQuery, useGetExpensesByCategoryQuery} as : api
