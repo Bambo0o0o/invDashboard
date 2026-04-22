@@ -1,6 +1,6 @@
 # Build MERN financeDashboard
 
-Last building time : 00:55:06 /07:04:56
+Last building time : 01:05:35 /07:04:56
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
@@ -326,4 +326,30 @@ git push -u origin main
       5) ...
       6) User with : userId, name, email
    3) Create api function to callBack each schemas as : "DashboardMetrics", "Products", "Users", "Expenses"
-   4) Export variables {useGetDashboardMetricsQuery, useGetProductsQuery, useCreateProductMutation,useGetUsersQuery, useGetExpensesByCategoryQuery} as : api
+   4) Create "endpoint" function to query each url : getDashboardMetrics, getProducts, createProduct, getUsers, getExpensesByCategory
+   5) Export variables {useGetDashboardMetricsQuery, useGetProductsQuery, useCreateProductMutation,useGetUsersQuery, useGetExpensesByCategoryQuery} as : api
+
+#### Setup sideBar : Connect redux store with app
+
+1) Go to {dashboardWrapper.tsx} create connection to NEXT.js
+2) Create "DashboardLayout" component above "DashboardWrapper" component
+   1) Create function "isSidebarCollapsed"
+   2) Create function "isDarkMode"
+   3) Create result function "useEffect" to swap : dark/light mode
+   4) Create return value of both function : isSidebarCollapsed, isDarkMode
+   5) Import useEffect from react
+   ***This function used to control html on {layout.tsx} file for dark/light mode***
+   6) Import useAppSelector from ./redux
+3) Commplete setup "DashboardWrapper" component
+   1) In return function delete all tag before
+   2) Adding "StoreProvider" tag
+   3) Adding "DashboardLayout" tag between StoreProvider then add children in there
+4) Adding "use client" on top of {dashboardWrapper.tsx} file
+   ***Let's Clarify "Context Provider" state on Next.js V14.2.4 page : <https://nextjs.org/docs/14/app/building-your-application/rendering/composition-patterns#using-context-providers>***
+
+#### Setup sideBar : Create sideBar elements
+
+1) Go to {index.tsx} file in Sidebar folder(Above return function)
+   1) Create dispatch params to calling function as : useAppDispatch()
+   2) Create isSidebarCollasped fucntion same as {dashboardWrapper.tsx} : useAppSelector()
+

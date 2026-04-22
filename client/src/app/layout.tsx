@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import DashboardWrapper from "./DashboardWrapper";
+import DashboardWrapper from "./dashboardWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // Control this html tag by nextJs on useEffect function in {dashboardWrapper.tsx} file
     <html lang="en">
       <body className={inter.className}>
         <DashboardWrapper>{children}</DashboardWrapper>
