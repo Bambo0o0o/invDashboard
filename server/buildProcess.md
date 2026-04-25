@@ -1,6 +1,6 @@
 # Build MERN financeDashboard
 
-Last building time : 01:05:35 /07:04:56
+Last building time : 01:16:07 /07:04:56
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
@@ -352,4 +352,91 @@ git push -u origin main
 1) Go to {index.tsx} file in Sidebar folder(Above return function)
    1) Create dispatch params to calling function as : useAppDispatch()
    2) Create isSidebarCollasped fucntion same as {dashboardWrapper.tsx} : useAppSelector()
+   3) Create toggleSidebar function to extend/collaspe
+   4) Create sidebarClassNames params to calling isSidebarCollasped function with collaspe properties
+2) Adding "div" tag for sidebarClassNames above Top Logo
+   1) Setup onClick function to toggle on/off collaspe sidebar in "button" tag
 
+#### Setup navBar : to handling toggle sidebar extend/collapse
+
+1) Go to {index.tsx} file in navBar folder (Adding above return function)
+   1) Create dispatch params to calling function as : useAppDispatch()
+   2) Create isSidebarCollasped fucntion same as {dashboardWrapper.tsx} : useAppSelector()
+   3) Create toggleSidebar function to extend/collaspe
+2) In Left side navBar setup button by adding "toggleSidebar" to onClick function
+3) Modify top logo as "isSidebarCollapsed" with : px-5 or px-8
+4) Hidden page name "invStock" as "isSidebarCollapsed" when it collaspe on h1 tag with : hidden or block
+
+#### Setup sideBar : with Link menu
+
+1) Setup "SideBarLink" function above "sideBar" function
+   1) Setup alternative function to "SidebarLinkProps"
+   2) Setup "pathname" params
+   3) Setup "isActive" params
+   4) Setup return function as : isCollapsed, isActive
+   5) Setup Icon and Label
+2) Create "SidebarLinkProps" above "sideBarLink" function
+3) Setup link for each menus
+   1) Setup "Dashboard" link with : href, icon , label, isCollapsed
+   2) Setup "Inventory" link with : href, icon , label, isCollapsed
+   3) Setup "Products" link with : href, icon , label, isCollapsed
+   4) Setup "Users" link with : href, icon , label, isCollapsed
+   5) Setup "Settings" link with : href, icon , label, isCollapsed
+   6) Setup "Expenses" link with : href, icon , label, isCollapsed
+4) Import Archive, CircleDollarSign, Clipboard, Layout, LucideIcon, Menu, SlidersHorizontal, User from lucide-react
+5) Import image from next/image
+6) Import link from next/link
+7) Setup image above "logo" page : <https://s3-inventorymanagement.s3.us-east-2.amazonaws.com/logo.png>
+    ***NextJs strick for image share have to follow code pattern as rule otherwise it will get error***
+    ***Next/Image : <https://nextjs.org/docs/messages/next-image-unconfigured-host>***
+    ***Also can solve by adding image and domains tags in : next.config.js***
+8) Config {next.config.js} to render logo page
+9) Setup sideBar footer when extend/collaspe "isSidebarCollapsed" as : hidden/block
+<!-- Complete Sidebar setup -->
+
+#### Setup navBar : for Dark/Light mode
+
+1) Go to {index.tsx} in Navbar folder
+   1) Create "isDarkMode" function to handling state
+   2) Create "toggleDarkMode" to handling dark/light mode
+   3) In Right side navBar setup button by adding "toggleDarkMode" to onClick function
+   4) Setup switch icon from light/dark as : moon and sun icon
+
+## Setup backend(Server) : to render data from database
+
+### Setup local database : Postgres
+
+1) Check data flow with drawSQL : <https://drawsql.app/teams/team-3023/diagrams/56-inventorymanagement>
+   ***For many data flow in application eventhough less flow it still should be clearly process with schemas on to show and manipulate data route on database, which much more clearly and easily to handle***
+2) Setup local database with "PostgreSQL"-V17.9 before deploy to clound amazon : <https://www.enterprisedb.com/downloads/postgres-postgresql-downloads>
+3) Setup "pgAdmin4" to visualize our data connection on database(It's included in postgresSQL installer)
+4) Create server on "pgAdmin4" 
+   1) Right click on server menu on sidebar then click create
+   2) Create register-server : on general tab
+      1) Name : invdashboard
+      2) Other option : keep default
+   3) Create connection : on connection tab
+      1) Host name/address : localhost
+      2) Port : 5432
+      3) Maintenance database : postgres
+      4) Username : postgres
+      5) password : private
+      6) Click save database setup
+5) When close application and open again need to re-connect by : right click then click "connect server"
+6) Create database on postgres
+   1) Right click on "Database" on sidebar 
+   2) Database : invDashboard
+   3) Other option : Keep default
+
+### Setup backend tools(Version following to EdROH)
+
+#### Setup backend on root project
+
+1) Create backend tools root project directory
+   1) Create server folder : mkdir server
+   2) Go to server folder : cd server
+   3) Setup initial tools {package.json} with NPM : npm init -y
+   4) Install package tools for orm connect to database : npm i prisma@5.16.2 @prisma/client@5.16.2
+   5) Initial prisma tools : npx prisma init
+   6) Go to prisma folder : cd prisma
+2) Copy assets folder which prepared by EdROH to server folder
