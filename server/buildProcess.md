@@ -1,6 +1,6 @@
 # Build MERN financeDashboard(Using SQL instead of NoSQL)
 
-Last building time : 01:41:05 /07:04:56
+Last building time : 01:56:33 /07:04:56
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
@@ -471,3 +471,4 @@ git push -u origin main
 3) merge database for prisma : npx prisma migrate dev --name init
 4) Running database as : npm run seed
 ***Complete solve error : setup prisma***
+***Modified : tsconfig,json, package.json, seed.ts, schema.prisma and change database name in postgres from invdashboard to postgres. Still got lint error on url but fine to connect postgres software now***
