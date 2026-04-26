@@ -1,9 +1,11 @@
-# Build MERN financeDashboard
+# Build MERN financeDashboard(Using SQL instead of NoSQL)
 
-Last building time : 01:16:07 /07:04:56
+Last building time : 01:41:05 /07:04:56
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
+
+***Support NodeJS 20.19+
 
 <!-- Shortkey -->
 1) In intellisence list we can automatic import tools by : ctrl + click on keyword
@@ -425,7 +427,7 @@ git push -u origin main
 5) When close application and open again need to re-connect by : right click then click "connect server"
 6) Create database on postgres
    1) Right click on "Database" on sidebar 
-   2) Database : invDashboard
+   2) Database : invdashboard
    3) Other option : Keep default
 
 ### Setup backend tools(Version following to EdROH)
@@ -436,7 +438,36 @@ git push -u origin main
    1) Create server folder : mkdir server
    2) Go to server folder : cd server
    3) Setup initial tools {package.json} with NPM : npm init -y
-   4) Install package tools for orm connect to database : npm i prisma@5.16.2 @prisma/client@5.16.2
+   4) Install package tools for SQL database : npm i prisma@latest @prisma/client@latest
    5) Initial prisma tools : npx prisma init
    6) Go to prisma folder : cd prisma
-2) Copy assets folder which prepared by EdROH to server folder
+2) Copy assets folder(prepared by EdROH) to server folder
+3) Copy seedData folder(prepared by EdROH) to prisma folder
+4) Copy {seed.ts} file(prepared by EdROH) to prisma folder
+5) Back to server folder : cd server
+6) Check typescript version : npx tsc -v
+7) Install "typescript"(if need) : npm install typescript --save-dev
+8) Initialize "typescript" package : npx tsc --init
+9) Install "typescript" tools : npm i -D ts-node typescript @types/node
+10) Modify {tsconfig.json} file as "Modules" tag
+11) Assign "module" as : "nodenext"
+    ***When get lint error using ==> "module" as : "esnext"***
+12) Assign "moduleResolution" as : "nodenext"
+    ***When get lint error using ==> "moduleResolution": "bundler"***
+13) Assign "resolveJsonModule" as : true,
+14) Assign "outDir" as : "./dist"
+    ***When get lint error using above "outDir" tag ==> "rootDir": "."***
+
+   ***Cann't complete install when follow up with EdROH. So I have to used package.json and tsconfig.json files instead back to step1 to create server folder***
+15) The purpose of {seed.ts} file is used to fetch data to SQL Database
+    1) Solved lint error on "fs" and "path" directory by adding tag withing ""compilerOptions": {} : "types": ["node"]
+16) Adding model schemas from EdRoh to {schema.prisma} file as : Users, Products, Sales, Purchases, Expenses, SalesSummary, PurchaseSummary, ExpenseSummary, ExpenseByCategory
+17) Adding "seed" tag in "script" tag to {package.json} file as ==> "seed" : "ts-node prisma/seed.ts"
+
+#### Setup backend : Connect to local database PostgresSQL
+
+1) Go to {.env} file setup local database : <DATABASE_URL="postgresql://postgres:927sAph25@*@localhost:5432/postgres?schema=public">
+2) generate database for prisma : npx prisma generate
+3) merge database for prisma : npx prisma migrate dev --name init
+4) Running database as : npm run seed
+***Complete solve error : setup prisma***
