@@ -25,6 +25,7 @@ myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
 15) intellisence highlight on that word : Ctrl + .
 16) Code auto formate : Shift + Alt + F
 17) Move menu to top : right click under menu bar --> select "Activity Bar Position" --> Top or Default
+18) Active shortkey on each tools : ctl+shift+p
 
 <!-- myGitHub -->
 echo "# financeDashboard" >> README.md
@@ -470,5 +471,13 @@ git push -u origin main
 2) generate database for prisma : npx prisma generate
 3) merge database for prisma : npx prisma migrate dev --name init
 4) Running database as : npm run seed
-***Complete solve error : setup prisma***
-***Modified : tsconfig,json, package.json, seed.ts, schema.prisma and change database name in postgres from invdashboard to postgres. Still got lint error on url but fine to connect postgres software now***
+   ***Complete solve error : setup prisma***
+   ***Modified : tsconfig,json, package.json, seed.ts, schema.prisma and change database name in postgres from invdashboard to postgres. Still got lint error on url but fine to connect postgres software now***
+5) Go to PostgresSQL open database as "postgres"
+   1) Open schemas
+   2) Open tables if it complete will see : Users, Products, Sales, Purchases, Expenses, SalesSummary, PurchaseSummary, ExpenseSummary, ExpenseByCategory and _prisma_migrations
+
+#### Setup backend : Install tools to manipulate backend
+
+1) Install tools as : npm i express body-parser cors dotenv helmet morgan concurrently
+2) Instal dependency tools as : npm i -D nodemon @types/cors @types/express @types/morgan
