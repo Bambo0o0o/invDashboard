@@ -1,6 +1,6 @@
 # Build MERN financeDashboard(Using SQL instead of NoSQL)
 
-Last building time : 01:56:33 /07:04:56
+Last building time : 01:59:45 /07:04:56
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
@@ -481,3 +481,24 @@ git push -u origin main
 
 1) Install tools as : npm i express body-parser cors dotenv helmet morgan concurrently
 2) Instal dependency tools as : npm i -D nodemon @types/cors @types/express @types/morgan
+3) Create "src" folder in server folder
+4) Create {index.ts} file in "src" folder
+   1) Import tools for server : express, dotenv, bodyParser, cors, helmet, morgan
+   2) Import routs for dashboard : dashboardRoutes, productRoutes, userRoutes, expenseRoutes
+   3) Configurated each tools as : app.use()
+   4) Configurated each routes as : app.use()
+   5) Create checkport function as : app.listen()
+
+#### Setup backend : To setup server running with Typescript
+
+1) Install more tools(To build typescript file) as : npm i rimraf
+   1) In {package.json} file adding "build" tag in "scripts{}" tag under "seed" as : "build": "rimraf dist && npx tsc"
+   2) Then adding "start" tag after "build" tag as : "start":"npm run build && node dist/index.js"
+   3) Then adding "dev" tag after "start" tag as : "dev":"npm run build && concurrently \"npx tsc -w\" \"nodemon --exec ts-node src/index.ts\""
+2) Go to {.env} file then set port as : PORT=8000
+3) Check working fine as : npm run dev
+
+
+2) Create controllers folder
+3) Create routes folder
+4) 
