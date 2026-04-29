@@ -1,6 +1,6 @@
 # Build MERN financeDashboard(Using SQL instead of NoSQL)
 
-Last building time : 01:59:45 /07:04:56
+Last building time : 02:07:14 /07:04:56
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
@@ -497,8 +497,15 @@ git push -u origin main
    3) Then adding "dev" tag after "start" tag as : "dev":"npm run build && concurrently \"npx tsc -w\" \"nodemon --exec ts-node src/index.ts\""
 2) Go to {.env} file then set port as : PORT=8000
 3) Check working fine as : npm run dev
+4) Testing routes as : app.get("/hello", (req, res) =>{})
+5) Testing by open another terminal as : curl http://localhost:8000/hello
 
+#### Setup backend : postman tool(Used instead of hard code testing with => app.get("/hello", (req, res) =>{}))
 
-2) Create controllers folder
-3) Create routes folder
-4) 
+1) Go to "postman" website download and install : <https://www.postman.com/downloads/>
+2) Sign in "postman" with "GitHub" account : windowslive main
+3) Using "postman" select GET request with url as : http://localhost:8000/hello
+
+6) Create controllers folder
+7) Create routes folder
+8) 
