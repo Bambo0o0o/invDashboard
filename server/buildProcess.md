@@ -1,6 +1,6 @@
 # Build MERN financeDashboard(Using SQL instead of NoSQL)
 
-Last building time : 02:07:14 /07:04:56
+Last building time : 02:17:11 /07:04:56
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
@@ -506,6 +506,35 @@ git push -u origin main
 2) Sign in "postman" with "GitHub" account : windowslive main
 3) Using "postman" select GET request with url as : http://localhost:8000/hello
 
-6) Create controllers folder
-7) Create routes folder
-8) 
+### Setup Backend : API as Dashboard for Expenses, Products, Sales, Puchases
+
+#### Setup Backend : Controllers and Routes
+
+1) Create "controllers" folder in src folder
+2) Create {dashboardController.ts} file in there
+   1) Import "request" and "response" from express
+   2) Import "PrismaClient" from prisma/client
+   3) Create "getDashboardMetrics" function with request-response
+   4) Create "Promise" as : popularProducts, salesSummary, purchaseSummary, expenseSummary, expenseByCategorySummaryRaw, expenseByCategorySummary
+   5) Each of Promise using "findMany" function with : 15 quantities and orderBy "desc" or descending
+   6) Create "catch error" when data missing retrieving
+3) Create "routes" folder in src folder
+4) Create {dashboardRoutes.ts} file in there
+   1) Import "Router" from express
+   2) Import "getDashboardMetrics" from controllers/dashboardController
+   3) Create "router" as Router function
+   4) Create root(/) router as : getDashboardMetrics
+   5) export router
+5) Go to {index.ts} in src folder
+   1) Import dashboardRoutes from routes/dashboardRoutes
+   2) Calling data with app.use("/dashboard", dashboardRoutes) by local as : <http://localhost:8000/dashboard>
+   3) Testing Home route as : curl http://localhost:8000/dashboard
+   4) Result will get set of datas as : {"popularProducts":[{"productId":"000a8c23-5bca-436c-a216-4e747a94c511","name":"Yew Plum Pine","price":196.27,"rating":1.6,"stockQuantity":967173},{"productId":"25d01c80-bca1-4a00-b1d0-0fbd39ff9e89","name":"Simpson's Rosinweed","price":184.41,"rating":1.98,"stockQuantity":953695},...]}
+
+
+
+
+
+
+2) Create routes folder
+3) 
