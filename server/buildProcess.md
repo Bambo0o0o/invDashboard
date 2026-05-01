@@ -8,6 +8,7 @@ myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
 ***Support NodeJS 20.19+
 
 <!-- Shortkey -->
+0) ***Open command guide : ctrl+space***
 1) In intellisence list we can automatic import tools by : ctrl + click on keyword
 2) Run client : npm run dev
 3) Run server :  npm run dev
@@ -33,10 +34,10 @@ git init
 git add README.md
 git commit -m "first commit"
 git branch -M main
-git remote add origin https://github.com/Bambo0o0o/invDashboard.git
+git remote add origin <https://github.com/Bambo0o0o/invDashboard.git>
 git push -u origin main
 <!-- Existed Repository -->
-git remote add origin https://github.com/Bambo0o0o/invDashboard.git
+git remote add origin <https://github.com/Bambo0o0o/invDashboard.git>
 git branch -M main
 git push -u origin main
 
@@ -44,14 +45,14 @@ git push -u origin main
 node: <https://nodejs.org/en/download/>
 npx: <https://www.npmjs.com/package/npx>
 vscode: <https://code.visualstudio.com/download>
-Postgres: <https://www.postgresql.org/download/ >
+Postgres: <<https://www.postgresql.org/download/> >
 PgAdmin: <https://www.pgadmin.org/download/>
 Prisma docs: <https://www.prisma.io/docs/prisma-orm/quickstart/prisma-postgres>
 Prisma types: <https://www.prisma.io/docs/orm/reference/prisma-schema-reference#model-fields>
-Postman: < https://www.postman.com/downloads/ >
+Postman: < <https://www.postman.com/downloads/> >
 
 <!-- Project's Tools : Database(AWS)-->
-AWS: < https://aws.amazon.com/>
+AWS: < <https://aws.amazon.com/>>
 AWS cli: <https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html>
 AWS billing: <https://signin.aws.amazon.com/signin?redirect_uri=https%3A%2F%2Fus-east-1.console.aws.amazon.com%2Fcostmanagement%2Fhome%3Fca-oauth-flow-id%3D158a%26hashArgs%3D%2523%26isauthcode%3Dtrue%26oauthStart%3D1775277372245%26region%3Dus-east-2%26state%3DhashArgsFromTB_us-east-1_c2cf67e320ca46e6&client_id=arn%3Aaws%3Asignin%3A%3A%3Aconsole%2Fcostinsights&forceMobileApp=0&code_challenge=VDgutDhmVneIMkADRaQCbFv87Y_mgbwMtQ_9V8j4Q4g&code_challenge_method=SHA-256>
 AWS free tier: <https://aws.amazon.com/free/?all-free-tier>
@@ -64,8 +65,8 @@ Redux Toolkit w/ Nextjs: <https://redux-toolkit.js.org/usage/nextjs>
 Redux Toolkit Query: <https://redux-toolkit.js.org/rtk-query/overview>
 Nextjs and Context Providers: <https://nextjs.org/docs/app/getting-started/server-and-client-components#using-context-providers>
 Tailwind: <https://tailwindcss.com/docs/theme>
-Recharts: <https://recharts.org/en-US/api >
-MUI: < https://mui.com/x/react-data-grid/>
+Recharts: <<https://recharts.org/en-US/api> >
+MUI: < <https://mui.com/x/react-data-grid/>>
 
 <!-- Project's Tools-->
 completed code : <https://github.com/ed-roh/inventory-management/tree/master>
@@ -116,7 +117,7 @@ aws commands : <https://github.com/ed-roh/inventory-management/blob/master/serve
 10) Code auto formate : Shift + Alt + F
 11) Move menu to top : right click under menu bar --> select "Activity Bar Position" --> Top or Default
 
-## Setup GitHub repository 
+## Setup GitHub repository
 
 1) Go to GitHub create new repository
 2) Add name as : invtDashboard
@@ -131,10 +132,10 @@ git init
 git add README.md
 git commit -m "first commit"
 git branch -M main
-git remote add origin https://github.com/Bambo0o0o/invtDashboard.git
+git remote add origin <https://github.com/Bambo0o0o/invtDashboard.git>
 git push -u origin main
 <!-- Existed Repository -->
-git remote add origin https://github.com/Bambo0o0o/invtDashboard.git
+git remote add origin <https://github.com/Bambo0o0o/invtDashboard.git>
 git branch -M main
 git push -u origin main
 
@@ -302,11 +303,11 @@ git push -u origin main
    ***Before make a link for "onClick" we need to setup redux toolkit first then useState to manipulate each actions as : Sidebar collaspe, Dark/Light mode and Setting***
 4) Install react-redux : npm i react-redux @reduxjs/toolkit dotenv redux-persist
 5) Create {.env.local} file in client folder to provide URL that run on our local machine
-   1) Setup URL as : NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
+   1) Setup URL as : NEXT_PUBLIC_API_BASE_URL=<http://localhost:8000>
 6) Create {redux.tsx} file in app folder
    1) Copy code from EdRoh file to our {redux.tsx} file (52:15)
    ***This {redux.tsx} file is setup for NextJS and Used to store data from different session on local***
-   ***What we will used {redux.tsx} file on our web page : ***
+   ***What we will used {redux.tsx} file on our web page :***
    <!--  1) REDUX PERSISTENCE, It's used to setup local storage
          2) All of this setup file come from "Redux-Toolkit.JS document
       -->
@@ -404,7 +405,7 @@ git push -u origin main
    ***For many data flow in application eventhough less flow it still should be clearly process with schemas on to show and manipulate data route on database, which much more clearly and easily to handle***
 2) Setup local database with "PostgreSQL"-V17.9 before deploy to clound amazon : <https://www.enterprisedb.com/downloads/postgres-postgresql-downloads>
 3) Setup "pgAdmin4" to visualize our data connection on database(It's included in postgresSQL installer)
-4) Create server on "pgAdmin4" 
+4) Create server on "pgAdmin4"
    1) Right click on server menu on sidebar then click create
    2) Create register-server : on general tab
       1) Name : invdashboard
@@ -418,7 +419,7 @@ git push -u origin main
       6) Click save database setup
 5) When close application and open again need to re-connect by : right click then click "connect server"
 6) Create database on postgres
-   1) Right click on "Database" on sidebar 
+   1) Right click on "Database" on sidebar
    2) Database : invdashboard
    3) Other option : Keep default
 
@@ -489,13 +490,13 @@ git push -u origin main
 2) Go to {.env} file then set port as : PORT=8000
 3) Check working fine as : npm run dev
 4) Testing routes as : app.get("/hello", (req, res) =>{})
-5) Testing by open another terminal as : curl http://localhost:8000/hello
+5) Testing by open another terminal as : curl <http://localhost:8000/hello>
 
 #### Setup backend : postman tool(Used instead of hard code testing with => app.get("/hello", (req, res) =>{}))
 
 1) Go to "postman" website download and install : <https://www.postman.com/downloads/>
 2) Sign in "postman" with "GitHub" account : windowslive main
-3) Using "postman" select GET request with url as : http://localhost:8000/hello
+3) Using "postman" select GET request with url as : <http://localhost:8000/hello>
 
 ### Setup Backend : API as Dashboard for Expenses, Products, Sales, Puchases
 
@@ -519,7 +520,7 @@ git push -u origin main
 5) Go to {index.ts} in src folder
    1) Import dashboardRoutes from routes/dashboardRoutes
    2) Calling data with app.use("/dashboard", dashboardRoutes) by local as : <http://localhost:8000/dashboard>
-   3) Testing Home route as : curl http://localhost:8000/dashboard
+   3) Testing Home route as : curl <http://localhost:8000/dashboard>
    4) Result will get set of datas as : {"popularProducts":[{"productId":"000a8c23-5bca-436c-a216-4e747a94c511","name":"Yew Plum Pine","price":196.27,"rating":1.6,"stockQuantity":967173},{"productId":"25d01c80-bca1-4a00-b1d0-0fbd39ff9e89","name":"Simpson's Rosinweed","price":184.41,"rating":1.98,"stockQuantity":953695},...]}
    5) Terminal result will be : 127.0.0.1 - - [30/Apr/2026:14:16:57 +0000] "GET /dashboard HTTP/1.1" 200 5074
 
@@ -543,12 +544,57 @@ git push -u origin main
    1) Setup column with "div className" tag as : "row-span-3 xl:row-span-6 bg-gray-500"
    2) Setup column with "div className" tag as : "row-span-3 xl:row-span-6 bg-gray-500"
    3) Setup column with "div className" tag as : "row-span-2 xl:row-span-3 col-span-1 md:col-span-2 xl:col-span-1 bg-gray-500"
-   4) Setup column with "div className" tag as : "row-span-3"
-   5) Setup column with "div className" tag as : "md:row-span-1 xl:row-span-2"
+   4) Setup column with "div className" tag as : "row-span-3 bg-gray-500"
+   5) Setup column with "div className" tag as : "md:row-span-1 xl:row-span-2 bg-gray-500"
+   6) Setup column with "div className" tag as : "md:row-span-1 xl:row-span-2 bg-gray-500"
+   7) Setup column with "div className" tag as : "md:row-span-1 xl:row-span-2 bg-gray-500"
 
+#### Setup frontend : CardPoopularProducts
 
-
-
-
-3) Create routes folder
-4) 
+1) Create {CardPropularProducts.tsx} file in dashboard folder
+   1) Create template as : tsrafce
+   2) Remove type props
+   3) Name function as : CardPropularProducts
+   4) Import useGetDashboardMetricsQuery from state/api
+   5) Create "data" parameter for as : useGetDashboardMetricsQuery
+   6) Copy "className" from {page.tsx} file to {CardPropularProducts.tsx} file to return function as : "row-span-3 xl:row-span-6 bg-gray-500"
+   7) Adding ternay function for "Loading..." and "Propular Products" page and setup className as : isLoading?():()
+2) Rendering "CardPropularProducts" to {page.tsx} file instead of "first" className as : <CardPopularProducts/>
+   1) Import CardPopularProducts from /CardPopularProducts
+3) Back to {CardPropularProducts.tsx} file in dashboard folder
+   1) Change background layout "bg-gray-500" to : bg-white shadow-md rounded-2xl pb-16
+   2) Create "horizontal" line below "h3" tag as : <hr />
+   3) Create "div" with "className" as : "overflow-auto h-full"
+   4) Create function as : dashboardMetrics?.popularProducts.map((product) => ())
+   5) Create "div" tag in "popularProducts" function  with "key" and "className" as : product.ProcutId, "flex items-center justify-between gap-3 px-5 py-7 border-b"
+   6) Create Left column for : Image, Product.name, Product.price, Product.rating
+      1) Create simple "image" as : <div>image</div>
+      2) Create div with "className" for product.name and product.price as : "flex flex-col justify-between gap-1"
+      3) Create div with "className" for product.name as : "font-bold text-gray-700"
+      4) Create div with "className" for product.price as : "flex text-sm items-center"
+      5) Create span with "className" for product.price as : "font-bold text-blue-500 text-xs"
+      6) Create span with "className" for "horizontal line" as : "mx-2"
+      7) Create simple "product.rating" as : <div>Rating</div>
+      8) Wrap up left column for "image, product.name, product.price, product.rating" with "div" tag as : "flex items-center gap-3"
+   7) Create right column for Stock data as
+      1) Wrap up "prooduct stock" with div and "className" as : "text-xs flex items-center"
+      2) Create "button" tag with "className" as : "p-2 rounded-full bg-blue-100 text-blue-600 mr-2"
+      3) Adding "ShoppingBag" icon in "button" tag with "className" as : "w-4 h-4"
+      4) Adding "math" funciton for "product.stockQuantity" below "button" tag as : {Math.round(product.stockQuantity / 1000)}k Sold
+   8) Create "rating" icon as Star
+      1) Adding "Rating" folder in (components) folder
+      2) Create {index.tsx} in Rating folder
+      3) Create template as : tsrafce
+      4) Changing index name to : Rating
+      5) Chnaging type Props as : RatingProps
+      6) Create "rating" data type as : Number
+      7) Create return value as array of number which is instance of star icon as : 1, 2, 3, 4, 5 with "index" parameter
+      8) Maping array number with "Star" icon form : lucide-react
+      9) Setup "key" as : "index" parameter
+      10) Setup color of "Star" from "rating" parameter as : "#FFC107" : "#E4E5E9"
+      11) Create "className" : "w-4 h-4"
+4) Back to {CardPropularProducts.tsx} file in dashboard folder
+   1) Create "Rating" link from /(components)/Rating
+   2) Change simple "rating" tag to : <Rating/>
+   3) Import Rating from /(components)/Rating
+   4) Adding "rating" value as : product.rating || 0
