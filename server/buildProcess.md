@@ -1,6 +1,6 @@
 # Build MERN financeDashboard(Using SQL instead of NoSQL)
 
-Last building time : 02:17:11 /07:04:56
+Last building time : 02:30:35 /07:04:56
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
@@ -321,16 +321,7 @@ git push -u origin main
    6) Export default globalSlice.reducer
 9) Create {api.ts} file in "state" folder
    1) Import createApi and fetchBaseQuery from /reduxjs/toolkit/query/react
-   2) Export schemas as :
-      1) Product with : productId, name, price, rating, stockQuantity
-      2) NewProduct with : name, price, rating, stockQuantity
-      3) SalesSummary with : salesSummaryId, totalValue, changePercentage, date
-      4) ...
-      5) ...
-      6) User with : userId, name, email
-   3) Create api function to callBack each schemas as : "DashboardMetrics", "Products", "Users", "Expenses"
-   4) Create "endpoint" function to query each url : getDashboardMetrics, getProducts, createProduct, getUsers, getExpensesByCategory
-   5) Export variables {useGetDashboardMetricsQuery, useGetProductsQuery, useCreateProductMutation,useGetUsersQuery, useGetExpensesByCategoryQuery} as : api
+   2) Setup "tsrafce" then change function name to Dashboard
 
 #### Setup sideBar : Connect redux store with app
 
@@ -530,11 +521,34 @@ git push -u origin main
    2) Calling data with app.use("/dashboard", dashboardRoutes) by local as : <http://localhost:8000/dashboard>
    3) Testing Home route as : curl http://localhost:8000/dashboard
    4) Result will get set of datas as : {"popularProducts":[{"productId":"000a8c23-5bca-436c-a216-4e747a94c511","name":"Yew Plum Pine","price":196.27,"rating":1.6,"stockQuantity":967173},{"productId":"25d01c80-bca1-4a00-b1d0-0fbd39ff9e89","name":"Simpson's Rosinweed","price":184.41,"rating":1.98,"stockQuantity":953695},...]}
+   5) Terminal result will be : 127.0.0.1 - - [30/Apr/2026:14:16:57 +0000] "GET /dashboard HTTP/1.1" 200 5074
+
+### Setup Frontend : Dashboard render data from local server PostgresSQL
+
+1) Go to {api.ts} file in client/src/state folder
+2) Make API call data from server to render on frontend
+   1) Addin "tagTypes" as : tagTypes: ["DashboardMetrics"]
+   2) In endpoint function adding "getDashboardMetrics" function and query to dashbaord page as : "/dashboard"
+   3) Adding "DashboardMetrics" contain with{from dashboardController.ts} file : popularProducts, salesSummary, purchaseSummary, expenseSummary, expenseByCategorySummary
+   4) Adding export interface above "DashboardMetrics" as : Product, NewProduct, SalesSummary, PurchaseSummary, ExpenseSummary, ExpenseByCategorySummary
+   5) Adding export interface below "DashboardMetrics" as : User
+
+#### Setup frontend : Setup layout page 3 columns and n rows on each column
+
+1) Go to {page.tsx} file in dashboard folder
+   1) Adding "use client" on top of page
+   2) Setup "className" for grid laout as : "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 xl:overflow-auto gap-10 pb-4 custom-grid-rows"
+2) Go to {globals.css} file adding media breakpoint as : @media (min-width: 768px) {} and @media (min-width: 1280px){}
+3) Back to  {page.tsx} file in dashboard folder
+   1) Setup column with "div className" tag as : "row-span-3 xl:row-span-6 bg-gray-500"
+   2) Setup column with "div className" tag as : "row-span-3 xl:row-span-6 bg-gray-500"
+   3) Setup column with "div className" tag as : "row-span-2 xl:row-span-3 col-span-1 md:col-span-2 xl:col-span-1 bg-gray-500"
+   4) Setup column with "div className" tag as : "row-span-3"
+   5) Setup column with "div className" tag as : "md:row-span-1 xl:row-span-2"
 
 
 
 
 
-
-2) Create routes folder
-3) 
+3) Create routes folder
+4) 
