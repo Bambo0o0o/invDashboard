@@ -1,6 +1,6 @@
 # Build MERN financeDashboard(Using SQL instead of NoSQL)
 
-Last building time : 02:30:35 /07:04:56
+Last building time : 02:48:25 /07:04:56
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
@@ -549,7 +549,7 @@ git push -u origin main
    6) Setup column with "div className" tag as : "md:row-span-1 xl:row-span-2 bg-gray-500"
    7) Setup column with "div className" tag as : "md:row-span-1 xl:row-span-2 bg-gray-500"
 
-#### Setup frontend : CardPoopularProducts
+#### Setup frontend : CardPopularProducts
 
 1) Create {CardPropularProducts.tsx} file in dashboard folder
    1) Create template as : tsrafce
@@ -598,3 +598,25 @@ git push -u origin main
    2) Change simple "rating" tag to : <Rating/>
    3) Import Rating from /(components)/Rating
    4) Adding "rating" value as : product.rating || 0
+
+#### Setup frontend : CardSalesSummary
+
+1) Create {CardSalesSummary.tsx} file in src/app/(components)/dashboard folder
+2) Rendering "CardSalesSummary" to {page.tsx} file instead of "first" className as : <CardSalesSummary/>
+3) *EdRoh Skip this process to be complete, So just copy and run his code at : 02:48:24*
+4) Must install "recharts Version 2.12.7" api to run code
+
+#### Setup frontend : CardPurchaseSummary
+
+1) Create {CardPurchaseSummary.tsx} file in src/app/(components)/dashboard folder
+   1) Rendering "CardPurchaseSummary" to {page.tsx} file instead of "first" className as : <CardPurchaseSummary/>
+   2) Create template as : tsrafce
+   3) Remove "type Props" and "Props" in function
+   4) Copy "className" from third line to "div" in return function as : "row-span-2 xl:row-span-3 col-span-1 md:col-span-2 xl:col-span-1 bg-gray-500"
+   5) Copy "data, isLoading, isError" from {CardSalesSummary.tsx} to {CardPurchaseSummary.tsx} above return function and replace parameters as : const { data:dashboardMetrics, isLoading } = useGetDashboardMetricsQuery();
+   6) Import useGetDashboardMetricsQuery from /state/api
+   ***Notice : We declaired "useGetDashboardMetricsQuery()" many files location(duplicated calling). This is the benefit function as "Redux-Toolkit" help us to manipulate it even each files used different parameters ===> This help us to more agiltis to data flow***
+   7) 
+
+
+
