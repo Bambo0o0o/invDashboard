@@ -725,7 +725,7 @@ git push -u origin main
 5) Setup "Xaxis" as : dataKey="date" tick={false} axisLine={false}
 6) Setup "YAxis" as : tickLine={false} tick={false} axisLine={false}
 7) Setup "Tooltip" with formater function as : formatter={(value: number) => []}
-8) Setup "Tooltip" with labelFormatter={(label) => {}}
+8) Setup "Tooltip" with labelFormatter function to "formatting date" as : {(label) => {}}
 9) Setup "Area" with :
    1) type="linear"
    2) dataKey="totalPurchased"
