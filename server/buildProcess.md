@@ -1,6 +1,6 @@
 # Build MERN financeDashboard(Using SQL instead of NoSQL)
 
-Last building time : 02:56:45 /07:04:56
+Last building time : 03:23:55 /07:04:56
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
@@ -680,7 +680,6 @@ git push -u origin main
    2) Create "span" with "className" as : "font-bold"
    3) Setup "span" value as : {highestValueDate}
 
-
 ### Setup frontend : CardPurchaseSummary
 
 1) Create {CardPurchaseSummary.tsx} file in src/app/(components)/dashboard folder
@@ -733,3 +732,13 @@ git push -u origin main
    4) fill="#8884d8"
    5) dot={true}
 10) Export default as : CardPurchaseSummary
+
+### Setup frontend : CardExpenseSummary
+
+1) Create {CardExpenseSummary.tsx} file in src/app/(components)/dashboard folder
+2) Rendering "CardExpenseSummary" to {page.tsx} file instead of "first" className as : <CardExpenseSummary/>
+3) Back to {CardExpenseSummary.tsx} file create template as : tsrafce
+4) Change "type Props" to : type ExpenseSums
+   1) setup array of category as string to : number
+5) Remove argument "props: Props" from "CardExpenseSummary" function
+6) Setup instance array colors above "CardExpenseSummary" function as : "#00C49F", "#0088FE", "#FFBB28"

@@ -1,8 +1,12 @@
 import React from 'react'
 
-type Props = {}
+type ExpenseSums = {
+  [category: string]: number;
+};
 
-const CardExpenseSummary = (props: Props) => {
+const colors = ["#00C49F", "#0088FE", "#FFBB28"];
+
+const CardExpenseSummary = () => {
   return (
     <div>CardExpenseSummary</div>
   )
