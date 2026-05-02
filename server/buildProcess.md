@@ -1,6 +1,6 @@
 # Build MERN financeDashboard(Using SQL instead of NoSQL)
 
-Last building time : 02:48:25 /07:04:56
+Last building time : 02:56:45 /07:04:56
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
@@ -599,14 +599,89 @@ git push -u origin main
    3) Import Rating from /(components)/Rating
    4) Adding "rating" value as : product.rating || 0
 
-#### Setup frontend : CardSalesSummary
+### Setup frontend : CardSalesSummary
 
 1) Create {CardSalesSummary.tsx} file in src/app/(components)/dashboard folder
 2) Rendering "CardSalesSummary" to {page.tsx} file instead of "first" className as : <CardSalesSummary/>
-3) *EdRoh Skip this process to be complete, So just copy and run his code at : 02:48:24*
-4) Must install "recharts Version 2.12.7" api to run code
+3) Import "useGetDashboardMetricsQuery" from /state/api
+4) Import "TrendingUp" from lucide-react
+5) Import "React, useState" from react
+6) Import "Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis" from recharts
+7) Create "CardSalesSummary" function as : const CardSalesSummary = () => {}
+8) Create parameters for "CardSalesSummary" function as 
+   1) Create "data, isLoading, isError" as : useGetDashboardMetricsQuery()
+   2) Create "salesData" as : data?.salesSummary || []
+   3) Create "timeframe, setTimeframe" as : useState("weekly")
+   4) Create "totalValueSum" as : salesData.reduce() || 0
+   5) Create "averageChangePercentage" as : salesData.reduce()
+   6) Create "highestValueData" as : salesData.reduce()
+   7) Create "highestValueDate" as : highestValueData.date
+   8) Create "isError" function return as : Failed to fetch data
+9) In return() function add "div" with "className" as row-span-3 xl:row-span-6 bg-white shadow-md rounded-2xl flex flex-col justify-between"
+10) Create "isLoading" function retrun : "Loading..." and "CardSalesSummary" rendering
+11) Create Rendering "CardSalesSummary"
+12) Export default as : CardSalesSummary
 
-#### Setup frontend : CardPurchaseSummary
+#### Setup frontend : CardSalesSummary with Header
+
+1) Create "div" tag wrap up header
+2) Create "h2" with "className" as : "text-lg font-semibold mb-2 px-7 pt-5"
+3) Create "Sales Summary" text
+
+#### Setup frontend : CardSalesSummary with Body Section
+
+1) Create "div" tag wrap up Body
+2) Create "div" with "className" to render data as : "flex justify-between items-center mb-6 px-7 mt-5"
+3) Create "div" with "className" to render "paragraph, saleValue, and trendGraph"
+   1) Create "paragraph" with "className" as : "text-xs text-gray-400"
+   2) Rendering text in "paragraph" as : Value
+   3) Create "span" with "className" to show "Value" as : "text-2xl font-extrabold"
+   4) Render "Value" as : ${(totalValueSum / 1000000).toLocaleString("en", {maximumFractionDigits: 2,})} m
+   5) Create "span" with "className" to show "trendGraph" as : "text-green-500 text-sm ml-2"
+   6) Create "TrendingUp" with "className" as : "inline w-4 h-4 mr-1"
+   7) Render "trendGraph" as : {averageChangePercentage.toFixed(2)}%
+4) Create "select" with "className" as : "shadow-sm border border-gray-300 bg-white p-2 rounded"
+5) Assign "value" as : {timeframe}
+6) Create "onChange" function as : setTimeframe(e.target.value)
+7) Create "option value" for : daily, weekly, monthly
+
+#### Setup frontend : CardSalesSummary with CHART
+
+1) Create "ResponsiveContainer" with "className" and size width="100%" height={350} as : "px-7"
+2) Create "BarChart" as
+   1) Create "data" equal to : {salesData}
+   2) Create "margin" as : top: 0, right: 0, left: -25, bottom: 0
+3) Create "CartesianGrid strokeDasharray" as : ""
+   1) Setup "vertical" as : false
+4) Create "XAxis" with
+   1) Setup "dataKey" as : date
+   2) Setup "tickFormatter" function to retrun : `${date.getMonth() + 1}/${date.getDate()}`
+5) Create "YAxis" with
+   1) Setup "tickFormatter" function to retrun : `$${(value / 1000000).toFixed(0)}m`
+   2) Setup "tick" as : fontSize: 12, dx: -1
+   3) Setup "tickLine, axisLine" as : false
+6) Create "Tooltip" with
+   1) Setup "formatter" as : `$${value.toLocaleString("en")}`
+   2) Setup "labelFormatter" function as : date and return date.toLocaleDateString()
+7) Create "Bar" with
+   1) Setup "dataKey" as : totalValue
+   2) Setup "fill" as : #3182ce
+   3) Setup "barSize" as : 10
+   4) Setup "radius" as : 10, 10, 0, 0
+
+#### Setup frontend : CardSalesSummary with FOOTER
+
+1) Create "div" tag to wrap up "FOOTER"
+2) Create "horizontal" line as : <hr />
+3) Create "div" with "className" as : "flex justify-between items-center mt-6 text-sm px-7 mb-4"
+4) Create "paragraph1" as : {salesData.length || 0} days
+5) Create "paragraph2" with "className" as : "text-sm"
+   1) Setup "Highest Sales Date" text as : " "
+   2) Create "span" with "className" as : "font-bold"
+   3) Setup "span" value as : {highestValueDate}
+
+
+### Setup frontend : CardPurchaseSummary
 
 1) Create {CardPurchaseSummary.tsx} file in src/app/(components)/dashboard folder
    1) Rendering "CardPurchaseSummary" to {page.tsx} file instead of "first" className as : <CardPurchaseSummary/>
@@ -616,7 +691,45 @@ git push -u origin main
    5) Copy "data, isLoading, isError" from {CardSalesSummary.tsx} to {CardPurchaseSummary.tsx} above return function and replace parameters as : const { data:dashboardMetrics, isLoading } = useGetDashboardMetricsQuery();
    6) Import useGetDashboardMetricsQuery from /state/api
    ***Notice : We declaired "useGetDashboardMetricsQuery()" many files location(duplicated calling). This is the benefit function as "Redux-Toolkit" help us to manipulate it even each files used different parameters ===> This help us to more agiltis to data flow***
-   7) 
+2) Setup "purchaseData" from "purchaseSummary" as : data?.purchaseSummary || [];
+3) Changing background to "white" and adding "flex", "shadow-md", "rounded" as : "flex flex-col justify-between row-span-2 xl:row-span-3 col-span-1 md:col-span-2 xl:col-span-1 bg-white shadow-md rounded-2xl"
+4) Copy isLoading function from "CardSalesSummary" replace "CardPurchaseSummary"  word as : {isLoading?<div className="m-5">Loading...</div>:<></>}
 
+#### Setup frontend : CardPurchaseSummary with "Header"
 
+1) Copy "header" from "CardSalesSummary" with "h2" and "className" place between <>..</> as : "text-lg font-semibold mb-2 px-7 pt-5"
+2) Change Name from "Sales Summary" to : "Purchase Summary"
 
+#### Setup frontend : CardPurchaseSummary with "Body"
+
+1) Create "div" tag to cover "Body" section
+2) Create "div" tag with "className" for "Body Header" as : "mb-4 mt-7 px-7"
+3) Create "p" tag with "className" for "Purchased" text as : "text-xs text-gray-400"
+4) Create "div" tag with "className" for align center as : "flex items-center"
+5) Create "p" tag with "className" for "lastDataPoint" as : "text-2xl font-bold"
+6) Create "lastDataPoint" function point to "totalPurchased" as : {lastDataPoint? numeral(lastDataPoint.totalPurchased).format():}
+7) Import numeral from numeral
+8) Install "numeral version 2.0.6" as : npm i numeral@2.0.6 types/numeral@2.0.5
+9) Create "lastDataPoint" parameter above return() function as : purchaseData[purchaseData.length - 1] || null
+10) *Create "lastDataPoint.changePercentage" logic function to seperate trend as : TrendingUp and TrendingDown*
+11) Create absolute fuction for percentage which cann't less than zero as : {Math.abs(lastDataPoint.changePercentage!)}%
+
+#### Setup frontend : CardPurchaseSummary with "Chart"
+
+1) Import tools from "recharts" as : Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis
+2) Create "ResponsiveContainer" tag with properties as : width="100%" height={200}
+3) Setup "ResponsiveContainer" tag with "className" as : "p-2"
+4) Create "AreaChart" tag with :
+   1) Setup "data" as : purchaseData
+   2) Setup "margin" as : top: 0, right: 0, left: -50, bottom: 45
+5) Setup "Xaxis" as : dataKey="date" tick={false} axisLine={false}
+6) Setup "YAxis" as : tickLine={false} tick={false} axisLine={false}
+7) Setup "Tooltip" with formater function as : formatter={(value: number) => []}
+8) Setup "Tooltip" with labelFormatter={(label) => {}}
+9) Setup "Area" with :
+   1) type="linear"
+   2) dataKey="totalPurchased"
+   3) stroke="#8884d8"
+   4) fill="#8884d8"
+   5) dot={true}
+10) Export default as : CardPurchaseSummary
