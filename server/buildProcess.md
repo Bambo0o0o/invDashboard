@@ -850,17 +850,19 @@ git push -u origin main
 
 1) Create "div" with "className" to wrap up Body page as : "flex mb-6 items-center justify-around gap-4 px-5"
 2) Create "div" with "className" for Body icon as : "rounded-full p-5 bg-blue-50 border-sky-300 border-[1px]"
-3) Create icon tag as : {primaryIcon}
+3) Create "icon" as : {primaryIcon}
 4) Create "div" with "className" to wrap up Body details as : "flex-1"
 5) Create mapping "Body detail" as : {details.map((detail, index) => ())}
-   1) Setup React.Fragment as : key={index}
+   1) Setup "React.Fragment" tag as : key={index}
    2) Create "div" with "className" to wrap up "Detail elements" as : "flex items-center justify-between my-4"
    3) Create "span" with "className" for "detail.title" as : "text-gray-500"
-   4) Create "span: with "className" for "detail.amount" as : "font-bold text-gray-800"
-   5) Create "div" with "className" for "detail.IconComponent" as : "flex items-center"
+   4) Setup "title" text as : detail.title
+   5) Create "span: with "className" for "detail.amount" as : "font-bold text-gray-800"
+   6) Setup "amount" text as : detail.amount
+   7) Create "div" with "className" for "detail.IconComponent" as : "flex items-center"   
       1) Setup "detail.IconComponent" as : `w-4 h-4 mr-1 ${getChangeColor(detail.changePercentage)}`
       2) Create "span" for "formatPercentage(detail.changePercentage)" as : `font-medium ${getChangeColor(detail.changePercentage)}`
-   6) Create "index" to checking "details.length" as : {index < details.length - 1 && <hr />}
+   8) Create "horizontal" line in between "Customer Growth and Expenses" as : {index < details.length - 1 && <hr />} .....Time Stamp : 03:55:00
 
 ### Setup frontend : StatCard page.tsx
 
@@ -921,4 +923,4 @@ git push -u origin main
       1) Setup "title" as "Discount"
       2) Setup "amount" as : "200.00"
       3) Setup "changePercentage" as : -10
-      4) Setup "IconComponent" as : TrendingDown
+      4) Setup "IconComponent" as : TrendingDown        .....Time Stamp : 03:56:56
