@@ -1,6 +1,6 @@
 # Build MERN financeDashboard(Using SQL instead of NoSQL)
 
-Last building time : 03:23:55 /07:04:56 (Expense Summary)
+Last building time : 03:42:43 /07:04:56 (Expense Summary)
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
@@ -810,38 +810,41 @@ git push -u origin main
 5) Setup "TrendingUp" with "className" as : "mr-2 text-green-500"
 6) Setup "TrendingUp" value as : 30%
 
-### Setup frontend : StatCard files
+### Setup frontend : StatCard.tsx
 
 1) Go to {StatCard.tsx} file 
 2) Import LucideIcon from lucide-react
 3) Import React from react
-4) Create "StatDetail" data set
+4) Changing "type Props" to : StatDetail and StatCardProps
+5) Create "StatDetail" data set
    1) Set "title" as : string
    2) Set "amount" as : string
    3) Set "changePercentage" as : number
    4) Set "IconComponent" as : LucideIcon
-5) Create "StatCardProps" data set
+6) Create "StatCardProps" data set
    1) Set "title" as : string
    2) Set "primaryIcon" as : JSX.Element
    3) Set "details" as : StatDetail[]
    4) Set "dateRange" as : string
-6) Create "StatCard" function
+7) Create "StatCard" function
    1) Declairing parameter as : title, primaryIcon, details, dataRange
    2) Calling "StatCardProps" function
       1) Create "formatPercentage" function check "value" >=0 then return : `${signal}${value.toFixed()}%`
       2) Create "getChangeColor" function check "value" >=0 then color "value" as : "text-green-500" : "text-red-500"
-7) Create "return" fucntion with
+8) Create "return" fucntion with
    1) Create "div" with "className" to wrap up "Header" and "Body" as : "md:row-span-1 xl:row-span-2 bg-white col-span-1 shadow-md rounded-2xl flex flex-col justify-between"
-8) Create "Header" and "Body"
-9) Export default as : StatCard
+9) Create "Header" and "Body"
+10) Export default as : StatCard
 
 #### Setup frontend : StatCard files with Header
 
 1) Create "div" wrap up Header
    1) Create "div" with "className" wrap up Header page as : "flex justify-between items-center mb-2 px-5 pt-4"
    2) Create "h2" with "className" for "tilte" as : "font-semibold text-lg text-gray-700"
-   3) Setup text as : title
+   3) Setup "Header" text as : title
    4) Create "span" with "className" for "dataRange" as : "text-xs text-gray-400"
+   5) Setup "Date" text as " dateRange
+   6) Create "horizontal" line as : <hr/>
 
 #### Setup frontend : StatCard files with Body
 
@@ -859,12 +862,15 @@ git push -u origin main
       2) Create "span" for "formatPercentage(detail.changePercentage)" as : `font-medium ${getChangeColor(detail.changePercentage)}`
    6) Create "index" to checking "details.length" as : {index < details.length - 1 && <hr />}
 
-### Setup frontend : StatCard
+### Setup frontend : StatCard page.tsx
 
 1) Go to {page.tsx} file in /client/src/app/dashboard
 2) Import StatCard from /StatCard
 3) Import "CheckCircle, Package, Tag, TrendingDown, TrendingUp" from lucide-react
-4) Setup "StatCard" tag for : "Customer & Expenses", "Dues & Pending Orders", "Sales & Discount"
+4) Setup "StatCard" tag for :
+   1) "Customer & Expenses"
+   2) "Dues & Pending Orders"
+   3) "Sales & Discount"
 
 #### Setup frontend : StatCard with "Customer & Expenses"
 
