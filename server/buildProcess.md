@@ -809,3 +809,56 @@ git push -u origin main
 4) Create "span" with "className" as : "flex items-center mt-2"
 5) Setup "TrendingUp" with "className" as : "mr-2 text-green-500"
 6) Setup "TrendingUp" value as : 30%
+
+### Setup frontend : StatCard files
+
+1) Go to {StatCard.tsx} file 
+2) Import LucideIcon from lucide-react
+3) Import React from react
+4) Create "StatDetail" data set
+   1) Set "title" as : string
+   2) Set "amount" as : string
+   3) Set "changePercentage" as : number
+   4) Set "IconComponent" as : LucideIcon
+5) Create "StatCardProps" data set
+   1) Set "title" as : string
+   2) Set "primaryIcon" as : JSX.Element
+   3) Set "details" as : StatDetail[]
+   4) Set "dateRange" as : string
+6) Create "StatCard" function
+   1) Declairing parameter as : title, primaryIcon, details, dataRange
+   2) Calling "StatCardProps" function
+      1) Create "formatPercentage" function check "value" >=0 then return : `${signal}${value.toFixed()}%`
+      2) Create "getChangeColor" function check "value" >=0 then color "value" as : "text-green-500" : "text-red-500"
+7) Create "return" fucntion with
+   1) Create "div" with "className" to wrap up "Header" and "Body" as : "md:row-span-1 xl:row-span-2 bg-white col-span-1 shadow-md rounded-2xl flex flex-col justify-between"
+8) Create "Header" and "Body"
+9) Export default as : StatCard
+
+#### Setup frontend : StatCard files with Header
+
+1) Create "div" wrap up Header
+   1) Create "div" with "className" wrap up Header page as : "flex justify-between items-center mb-2 px-5 pt-4"
+   2) Create "h2" with "className" for "tilte" as : "font-semibold text-lg text-gray-700"
+   3) Setup text as : title
+   4) Create "span" with "className" for "dataRange" as : "text-xs text-gray-400"
+
+#### Setup frontend : StatCard files with Body
+
+1) Create "div" with "className" to wrap up Body page as : "flex mb-6 items-center justify-around gap-4 px-5"
+2) Create "div" with "className" for Body icon as : "rounded-full p-5 bg-blue-50 border-sky-300 border-[1px]"
+3) Create icon tag as : {primaryIcon}
+4) Create "div" with "className" to wrap up Body details as : "flex-1"
+5) Create mapping "Body detail" as : {details.map((detail, index) => ())}
+   1) Setup React.Fragment as : key={index}
+   2) Create "div" with "className" to wrap up "Detail elements" as : "flex items-center justify-between my-4"
+   3) Create "span" with "className" for "detail.title" as : "text-gray-500"
+   4) Create "span: with "className" for "detail.amount" as : "font-bold text-gray-800"
+   5) Create "div" with "className" for "detail.IconComponent" as : "flex items-center"
+      1) Setup "detail.IconComponent" as : `w-4 h-4 mr-1 ${getChangeColor(detail.changePercentage)}`
+      2) Create "span" for "formatPercentage(detail.changePercentage)" as : `font-medium ${getChangeColor(detail.changePercentage)}`
+   6) Create "index" to checking "details.length" as : {index < details.length - 1 && <hr />}
+
+### Setup frontend : StatCard 
+
+#### Setup frontend : StatCard with "Customer & Expenses"
