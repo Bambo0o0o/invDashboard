@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle, Package, TrendingDown, TrendingUp } from "lucide-react";
+import { CheckCircle, Package, Tag, TrendingDown, TrendingUp } from "lucide-react";
 import CardExpenseSummary from "./CardExpenseSummary";
 import CardPopularProducts from "./CardPopularProducts";
 import CardPurchaseSummary from "./CardPurchaseSummary";
@@ -15,6 +15,7 @@ const Dashboard = () => {
       <CardSalesSummary/>
       <CardPurchaseSummary/>
       <CardExpenseSummary/>
+
       {/* StatCard Customer & Expenses */}
       <StatCard
         title="Customer & Expenses"
@@ -35,7 +36,7 @@ const Dashboard = () => {
           },
         ]}
       />
-      {/* Dues & Pending Orders */}
+      {/* StatCard Dues & Pending Orders */}
       <StatCard
         title="Dues & Pending Orders"
         primaryIcon={<CheckCircle className="text-blue-600 w-6 h-6" />}
@@ -55,7 +56,26 @@ const Dashboard = () => {
           },
         ]}
       />
-      <div className="md:row-span-1 xl:row-span-2 bg-gray-500"/>
+      {/* StatCard Sales & Discount */}
+      <StatCard
+        title="Sales & Discount"
+        primaryIcon={<Tag className="text-blue-600 w-6 h-6" />}
+        dateRange="22 - 29 October 2023"
+        details={[
+          {
+            title: "Sales",
+            amount: "1000.00",
+            changePercentage: 20,
+            IconComponent: TrendingUp,
+          },
+          {
+            title: "Discount",
+            amount: "200.00",
+            changePercentage: -10,
+            IconComponent: TrendingDown,
+          },
+        ]}
+      />
     </div>
   );
 };

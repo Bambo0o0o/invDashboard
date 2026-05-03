@@ -899,3 +899,20 @@ git push -u origin main
       2) Setup "amount" as : "147"
       3) Setup "changePercentage" as : -56
       4) Setup "IconComponent" as : TrendingDown
+
+#### Setup frontend : StatCard with "Sales & Discount"
+
+1) Create "StatCard" tag and parameters as
+   1) Setup "title" as : "Sales & Discount"
+   2) Setup "primaryIcon" as : {<Tag className="text-blue-600 w-6 h-6" />}
+   3) Setup "dateRange" as : "22 - 29 October 2023"
+   4) Setup "details" for "Sales" as
+      1) Setup "title" as "Sales"
+      2) Setup "amount" as : "1000.00"
+      3) Setup "changePercentage" as : 20
+      4) Setup "IconComponent" as : TrendingUp
+   5) Setup "details" for "Discount" as
+      1) Setup "title" as "Discount"
+      2) Setup "amount" as : "200.00"
+      3) Setup "changePercentage" as : -10
+      4) Setup "IconComponent" as : TrendingDown
