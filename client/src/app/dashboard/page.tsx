@@ -1,6 +1,6 @@
 "use client";
 
-import { Package, TrendingDown, TrendingUp } from "lucide-react";
+import { CheckCircle, Package, TrendingDown, TrendingUp } from "lucide-react";
 import CardExpenseSummary from "./CardExpenseSummary";
 import CardPopularProducts from "./CardPopularProducts";
 import CardPurchaseSummary from "./CardPurchaseSummary";
@@ -15,6 +15,7 @@ const Dashboard = () => {
       <CardSalesSummary/>
       <CardPurchaseSummary/>
       <CardExpenseSummary/>
+      {/* StatCard Customer & Expenses */}
       <StatCard
         title="Customer & Expenses"
         primaryIcon={<Package className="text-blue-600 w-6 h-6" />}
@@ -34,7 +35,26 @@ const Dashboard = () => {
           },
         ]}
       />
-      <div className="md:row-span-1 xl:row-span-2 bg-gray-500"/>
+      {/* Dues & Pending Orders */}
+      <StatCard
+        title="Dues & Pending Orders"
+        primaryIcon={<CheckCircle className="text-blue-600 w-6 h-6" />}
+        dateRange="22 - 29 October 2023"
+        details={[
+          {
+            title: "Dues",
+            amount: "250.00",
+            changePercentage: 131,
+            IconComponent: TrendingUp,
+          },
+          {
+            title: "Pending Orders",
+            amount: "147",
+            changePercentage: -56,
+            IconComponent: TrendingDown,
+          },
+        ]}
+      />
       <div className="md:row-span-1 xl:row-span-2 bg-gray-500"/>
     </div>
   );

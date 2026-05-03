@@ -1,6 +1,6 @@
 # Build MERN financeDashboard(Using SQL instead of NoSQL)
 
-Last building time : 03:23:55 /07:04:56
+Last building time : 03:23:55 /07:04:56 (Expense Summary)
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
@@ -880,5 +880,22 @@ git push -u origin main
    5) Setup "details" for "Expenses" as
       1) Setup "title" as "Expenses"
       2) Setup "amount" as : "10.00"
+      3) Setup "changePercentage" as : -56
+      4) Setup "IconComponent" as : TrendingDown
+
+#### Setup frontend : StatCard with "Dues & Pending Orders"
+
+1) Create "StatCard" tag and parameters as
+   1) Setup "title" as : "Dues & Pending Orders"
+   2) Setup "primaryIcon" as : {<CheckCircle className="text-blue-600 w-6 h-6" />}
+   3) Setup "dateRange" as : "22 - 29 October 2023"
+   4) Setup "details" for "Dues" as
+      1) Setup "title" as "Dues"
+      2) Setup "amount" as : "250.00"
+      3) Setup "changePercentage" as : 131
+      4) Setup "IconComponent" as : TrendingUp
+   5) Setup "details" for "Pending Orders" as
+      1) Setup "title" as "Pending Orders"
+      2) Setup "amount" as : "147"
       3) Setup "changePercentage" as : -56
       4) Setup "IconComponent" as : TrendingDown
