@@ -859,6 +859,26 @@ git push -u origin main
       2) Create "span" for "formatPercentage(detail.changePercentage)" as : `font-medium ${getChangeColor(detail.changePercentage)}`
    6) Create "index" to checking "details.length" as : {index < details.length - 1 && <hr />}
 
-### Setup frontend : StatCard 
+### Setup frontend : StatCard
+
+1) Go to {page.tsx} file in /client/src/app/dashboard
+2) Import StatCard from /StatCard
+3) Import "CheckCircle, Package, Tag, TrendingDown, TrendingUp" from lucide-react
+4) Setup "StatCard" tag for : "Customer & Expenses", "Dues & Pending Orders", "Sales & Discount"
 
 #### Setup frontend : StatCard with "Customer & Expenses"
+
+1) Create "StatCard" tag and parameters as
+   1) Setup "title" as : "Customer & Expenses"
+   2) Setup "primaryIcon" as : {<Package className="text-blue-600 w-6 h-6" />}
+   3) Setup "dateRange" as : "22 - 29 October 2023"
+   4) Setup "details" for "Customer Growth" as
+      1) Setup "title" as "Customer Growth"
+      2) Setup "amount" as : "175.00"
+      3) Setup "changePercentage" as : 131
+      4) Setup "IconComponent" as : TrendingUp
+   5) Setup "details" for "Expenses" as
+      1) Setup "title" as "Expenses"
+      2) Setup "amount" as : "10.00"
+      3) Setup "changePercentage" as : -56
+      4) Setup "IconComponent" as : TrendingDown
