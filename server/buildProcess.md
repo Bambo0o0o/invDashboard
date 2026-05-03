@@ -742,3 +742,70 @@ git push -u origin main
    1) setup array of category as string to : number
 5) Remove argument "props: Props" from "CardExpenseSummary" function
 6) Setup instance array colors above "CardExpenseSummary" function as : "#00C49F", "#0088FE", "#FFBB28"
+7) Import "ExpenseByCategorySummary, useGetDashboardMetricsQuery" from /state/api
+8) Import "TrendingUp" from lucide-react
+9) Import "Cell, Pie, PieChart, ResponsiveContainer" from recharts
+10) Declare parameters
+    1) Assinged "data: dashboardMetrics, isLoading" as : useGetDashboardMetricsQuery()
+    2) Assigned "expenseSummary" as : dashboardMetrics?.expenseSummary[0]
+    3) Assigned "expenseByCategorySummary" as : dashboardMetrics?.expenseByCategorySummary || []
+    4) Assigned "expenseSums" as : expenseByCategorySummary.reduce() and return acc
+    5) Assigned "expenseCategories" as : Object.entries(expenseSums).map()
+    6) Assigned "totalExpenses" as : expenseCategories.reduce()
+    7) Assigned "formattedTotalExpenses" as : totalExpenses.toFixed(2)
+11) Setup return function
+    1) Create "div" with "className" as : "row-span-3 bg-white shadow-md rounded-2xl flex flex-col justify-between"
+    2) Create "isLoading" function to check data was fetched as : {isLoading ? ():()}
+    3) Create "CardExpenseSummary" box
+12) Create Export default as : CardExpenseSummary
+
+#### Setup frontend : CardExpenseSummary with Header
+
+1) Create "div" tag to wrap up Header element
+2) Create "h2" with "className" as : "text-lg font-semibold mb-2 px-7 pt-5"
+3) Setup text Header as : Expense Summary
+
+#### Setup frontend : CardExpenseSummary with Body wrap up chart
+
+1) Create "div" with "className" as : "xl:flex justify-between pr-7"
+2) Create "div" with "className" to wrap up chart area as : "relative basis-3/5"
+3) Create "ResponsiveContainer" tag with size as : width="100%" height={140}
+4) Create "PieChart" tag
+   1) Create "Pie" tag with 
+   2) Setup data as : {expenseCategories}
+   3) Setup innerRadius as : {50}
+   4) Setup outerRadius as : {60}
+   5) Setup fill as : "#8884d8"
+   6) Setup dataKey as : "value"
+   7) Setup nameKey as : "name"
+   8) Setup cx as : "50%"
+   9) Setup cy as : "50%"
+5) Create "expenseCategories" function as : {expenseCategories.map((entry, index) => ())}
+6) Create "div" with "className" to show formattedTotalExpenses value as : "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center basis-2/5"
+   1) Create "span" with "className" as : "font-bold text-xl"
+   2) Rendering "formattedTotalExpenses" value as : ${formattedTotalExpenses}
+
+#### Setup frontend : CardExpenseSummary with Label
+
+1) Create "ul" with "className" tag as : "flex flex-col justify-around items-center xl:items-start py-5 gap-3"
+2) Create "expenseCategories" function as : {expenseCategories.map((entry, index) => ())}
+3) Create "li" with "key" as : `legend-${index}`
+4) Create "li" with "className" as : "flex items-center text-xs"
+5) Create "span" with "className" as : "mr-2 w-3 h-3 rounded-full"
+6) Setup parameter "style" as : backgroundColor: colors[index % colors.length]
+7) Setup "entry name" as : {entry.name}
+
+#### Setup frontend : CardExpenseSummary with Footer
+
+1) Create "div" to wrap up footer
+2) Create horizontal line
+3) Checking "expenseSummary" value
+   1) Create "div" with "className" as : "mt-3 flex justify-between items-center px-7 mb-4"
+   2) Create "div" with "className" as : "pt-2"
+   3) Create "p" with "className" as : "text-sm"
+   4) Setup "Average" value as : " "
+   5) Create "span" with "className" as : "font-semibold"
+   6) Setup "expenseSummary" as : ${expenseSummary.totalExpenses.toFixed(2)}
+4) Create "span" with "className" as : "flex items-center mt-2"
+5) Setup "TrendingUp" with "className" as : "mr-2 text-green-500"
+6) Setup "TrendingUp" value as : 30%
