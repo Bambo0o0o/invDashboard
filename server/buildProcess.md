@@ -992,7 +992,7 @@ git push -u origin main
    ***Don't forget to turn on "PostgresSQL" otherwise It will get error as :***
    ***127.0.0.1 - - [03/May/2026:13:24:34 +0000] "GET /products HTTP/1.1" 500***        ...Time Stamp : 04:05:50
 
-### Setup Frontend : Setup products connection from frontend to backend
+### Setup Frontend : Setup Products data connection from frontend to backend
 
 1) Go to {api.ts} file in client/src/state
 2) Create "getProduct" connect to backend as ==> getProducts: build.query<Product[], string | void>({})
@@ -1009,23 +1009,37 @@ git push -u origin main
 5) Remove : Props
 6) Remove : Import react
 7) Adding "use client" on top of file
-8) Create "Inventory" function as : const Inventory = () => {}
-    1) Create parameters "data: products, isError, isLoading" as : useGetProductsQuery()
-    2) Import useGetProductsQuery from /state/api
+8) Export default as : Inventory
+9) Create "Inventory" function as : const Inventory = () => {}
+   1) Create parameters "data: products, isError, isLoading" as : useGetProductsQuery()
+   2) Import useGetProductsQuery from /state/api
    ***Testing page as : console.log("products: ",products);***
    ***Go to url as : localhost:3000/inventory***
    ***Check Chrome development tools as : Network tab ==> will See products schema on Fetch/XHR as Header***
-
-
-9) Create array data of "columns" as : GridColDef[]=[{}]
-    1) Create "productId" parameters as ==> field: "productId", headerName: "ID", width: 90
-    2) Create "name" parameters as ==> field: "name", headerName: "Product Name", width: 200 
-    3) Create "price" parameters as ==> field: "price", headerName: "Price", width: 110, type: "number", valueGetter: (value, row) => `$${row.price}`,
-    4) Create "rating" parameters as ==> field: "rating", headerName: "Rating", width: 110, type: "number",valueGetter: (value, row) => (row.rating ? row.rating : "N/A")
-    5) Create "stockQuantity" parameter as ==> field: "stockQuantity", headerName: "Stock Quantity", width: 150, type: "number"
+   3) Checking "data was fetch" correct with :   if (isLoading) {return <_div>Loading...</_div>}
+   4) Checking "catchup Error or Products not existed" with : if (isError || !products){return <_div >Failed to fetch products</div>}
 10) Create "return" function as
     1) Create "div" tag with "className" as : "flex flex-col"
     2) Create "Header" tag with "name" as : "Inventory"
-    3) Create "DataGrid" tag and setup : rows, columns, getRowID, checkboxSelection
-    4) Create "className" as : "bg-white shadow rounded-lg border border-gray-200 mt-5 !text-gray-700"
-11) Export default as : Inventory
+11) Create "Header" folder in client/src/app/(components)
+    1) Create {index.tsx} file in client/src/app/(components)/Header
+    2) Using template : tsrafce
+    3) Create Dynamics "Header" fucntion for multi used pages
+       1) Create "Type Props" as : HeaderProps={name:string}
+       2) Create "Header" function as ==> ({name}) : HeaderProps=>{}
+       3) Create "return" function with "h1" and "className" tag as : "text-2xl font-semibold text-gray-700">
+       4) Rendering "Header name" with Dynamic values as : {name}
+       5) Export default as : Header
+12) Import Header from @mui/x-data-grid
+13) Create "DataGrid" tag and setup : rows, columns, getRowID, checkboxSelection
+    ***Columns we hard code on this file because it didn't fetching data from database, So it is static data***
+14) Create array data of "columns" as : GridColDef[]=[{}]
+    1) Import "GridColDef" from @mui/x-data-grid
+    ***Row data come with "products" which create by backend***
+    2) Create "productId" parameters as ==> field: "productId", headerName: "ID", width: 90
+    3) Create "name" parameters as ==> field: "name", headerName: "Product Name", width: 200 
+    4) Create "price" parameters as ==> field: "price", headerName: "Price", width: 110, type: "number", valueGetter: (value, row) => `$${row.price}`,
+    5) Create "rating" parameters as ==> field: "rating", headerName: "Rating", width: 110, type: "number",valueGetter: (value, row) => (row.rating ? row.rating : "N/A")
+    6) Create "stockQuantity" parameter as ==> field: "stockQuantity", headerName: "Stock Quantity", width: 150, type: "number"
+    7) Create styled for "DataGrid" with "className" as : "bg-white shadow rounded-lg border border-gray-200 mt-5 !text-gray-700"
+
