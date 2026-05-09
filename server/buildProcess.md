@@ -1,9 +1,10 @@
 # Build MERN financeDashboard(Using SQL instead of NoSQL)
 
-Last building time : 04:05:35 /07:04:56 (Expense Summary)
+Last building time : 04:25:25 /07:04:56 (Expense Summary)
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
+Local data base on : PostgresSQL
 
 ***Support NodeJS 20.19+
 
@@ -1000,7 +1001,7 @@ git push -u origin main
 4) Create "createProduct" connect to backend as ==> createProduct: build.mutation<Product, NewProduct>({})
 5) Adding "useGetProductsQuery" and "usedCreateProductMutation" to : export const{...} = api
 
-#### Setup Fronted : Setup inventrory page (With Header and Table components using MUI data grid tool)
+#### Setup Fronted : Setup Inventrory Page
 
 1) Create "inventory" folder in client/src/app
 2) Create {page.tsx} file in inventory folder
@@ -1016,8 +1017,8 @@ git push -u origin main
    ***Testing page as : console.log("products: ",products);***
    ***Go to url as : localhost:3000/inventory***
    ***Check Chrome development tools as : Network tab ==> will See products schema on Fetch/XHR as Header***
-   3) Checking "data was fetch" correct with :   if (isLoading) {return <_div>Loading...</_div>}
-   4) Checking "catchup Error or Products not existed" with : if (isError || !products){return <_div >Failed to fetch products</div>}
+   3) Checking "data was fetch" correct with :   if (isLoading) {return Loading...}
+   4) Checking "catchup Error or Products not existed" with : if (isError || !products){return Failed to fetch products}
 10) Create "return" function as
     1) Create "div" tag with "className" as : "flex flex-col"
     2) Create "Header" tag with "name" as : "Inventory"
@@ -1043,3 +1044,167 @@ git push -u origin main
     6) Create "stockQuantity" parameter as ==> field: "stockQuantity", headerName: "Stock Quantity", width: 150, type: "number"
     7) Create styled for "DataGrid" with "className" as : "bg-white shadow rounded-lg border border-gray-200 mt-5 !text-gray-700"
 
+#### Setup Fronted : Setup Products Page
+
+1) Create "products" folder in /client/src/app
+2) Create {page.tsx} in "products" folder
+3) Using template : tsrafce
+4) Rename "page" to : Products
+5) Changing "Type Props" to : ProductFormData
+   1) Create "name" as : string
+   2) Create "price" as : number
+   3) Create "stockQuantity" as : number
+   4) Create "rating" as : number
+6) Remove : Import react
+7) Adding "use client" on top of file
+8) Create "state" function with useState("") as : searchTerm, setSearchTerm
+9) Create "state" function with useState("false") as : isModalOpen, setIsModalOpen
+10) Create "data: products, isLoading, isError " as : useGetProductsQuery(searchTerm)
+11) Create "createProduct" as : useCreateProductMutation()
+12) Create "handleCreateProduct" function as : (productData: ProductFormData) => {}
+13) Checking "data was fetch" correct with : if (isLoading) {return Loading...}
+14) Checking "catchup Error or Products not existed" with : if (isError || !products){return Failed to fetch products}
+15) Create "return()" function as : Search Bar, Header Bar, Body Product List and Modal
+16) Create "div" with "className" to covering "return()" function's elements as : "mx-auto pb-5 w-full"
+
+##### Setup Frontend : Setup Products Page with "Search Bar" element
+
+1) Create "div" with "className" as : "mb-6"
+2) Create "div" with "className" as : "flex items-center border-2 border-gray-200 rounded"
+3) Create "SearchIcon" with "className" as :  "w-5 h-5 text-gray-500 m-2"
+4) Create "input" box with
+   1) Create "className" style as : "w-full py-2 px-4 rounded bg-white"
+   2) Create "placeholder" text as : "Search products..."
+   3) Create "value" for searching data as : {searchTerm}
+   4) Create "onChange" function as : (e) => setSearchTerm(e.target.value)
+
+##### Setup Frontend : Setup Products Page with "Header Bar" element
+
+1) Create "div" with "className" as : "flex justify-between items-center mb-6"
+2) Create "Header" with "name" as : "Products"
+3) Create "button" object with
+   1) Create "className" as : "flex items-center bg-blue-500 hover:bg-blue-700 text-gray-200 font-bold py-2 px-4 rounded"
+   2) Create "onClick" function as : () => setIsModalOpen(true)
+
+##### Setup Frontend : Setup Products Page with "Body Products List" element
+
+1) Create "div" with "className" as : "grid grid-cols-1 sm:grid-cols-2 lg-grid-cols-3 gap-10 justify-between"
+2) Create "Prodcuct" fetching data function to check data was fetched from backend
+   1) Create "isLoading" function as :   isLoading ? (Loading...) : (Page loading)
+   2) Create "Page Loading" fucntion as : products?.map((product) => ())
+   3) Create "div" with "key" as : product.productId
+   4) Setup "className" for "div" as : "border shadow rounded-md p-4 max-w-full w-full mx-auto"
+   5) Create "div" with "className" for "Product Images" structure as : "flex flex-col items-center"
+      1) Create "Image" tag with url as : <`https://s3-inventorymanagement.s3.us-east-2.amazonaws.com/product${Math.floor(Math.random() * 3) + 1}.png`>
+      2) Setup "alt" as : product.name
+      3) Setup "width" and "height" as : 150, 150
+      4) Create "className" as : "mb-3 rounded-2xl w-36 h-36"
+   6) Create "Header" text with "h3" tag and "className" as : "text-lg text-gray-900 font-semibold"
+   7) Setup "Header" text as : product.name
+   8) Create "Paragraph" text with "p" tag and "className" as : "text-gray-800"
+   9) Setup "Paragraph" text as : ${product.price.toFixed(2)}
+   10) Create "div" with "className" for "stockQuantity" as : "text-sm text-gray-600 mt-1"
+   11) Setup "Stock" as : product.stockQuantity
+   12) Create dynamic rating for "product rating" as : product.rating && (Rating rating={product.rating})
+       1) Create "div" with "className" for "product rating" as : "flex items-center mt-2"
+       2) Fetching "rating" from backend(PostgresSQL) as : Rating rating={product.rating}
+
+##### Setup Frontend : Setup Products Page with "Modal" element
+
+1) Create "CreateProductModal" tag
+2) Setup "isOpen" as : isModalOpen
+3) Setup "onClose" as : () => setIsModalOpen(false)
+4) Setup "onCreate" as : handleCreateProduct
+
+#### Setup Frontend : CreateProductModal suppot creating new product
+
+1) Create {CreateProductModal.tsx} in "products" folder
+2) Using template : tsrafce
+3) Rename "page" to : CreateProductModal
+4) Modify "Type Props" with : ProductFormData and CreateProductModalProps
+   1) Setup "ProductFormData" with : name, price, stockQuantity, rating
+   2) Setup "CreateProductModalProps" with : isOpen, onClose function, onCreate funciton
+5) Create CreateProductModal with
+   1) Declaring functions with : isOpen, onClose, onCreate
+   2) Create "CreateProductModalProps" function to handling "create product" form with
+      1) Create "useState()" function for "formData, setFormData" with : productId, name, price, stockQuantity, rating
+      2) Create "handleChange" function to handling data adding as : (e: ChangeEvent<HTMLInputElement>) => {}
+      3) Create "handleSubmit" function to handling data summitning as : (e: FormEvent<HTMLFormElement>) => {}
+      4) Create "not isOpen" function as : retrun null
+      5) Create "labelCssStyles" for "reusable" with css format as : "block text-sm font-medium text-gray-700"
+      6) Create "inputCssStyles" for "reusable" with css format as : "block w-full mb-2 p-2 border-gray-500 border-2 rounded-md"
+   3) Create "return()" function with
+      1) Create "div" with "className" as : "fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-20"
+      2) Create "div" with "className" as : "relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+      3) Create "Header" name as : "Create New Product"
+      4) Create "Form" with "className" for "onSubmit" function as : "mt-5"
+      5) Create "onSubmit" function as : handleSubmit
+      6) Create "Form Elements" with : Product Name, Price, Stock Quantity, Rating, Create Actions
+
+##### Setup Frontend : Setup Products Form with "Product Name" element
+
+1) Create "label" with "className" as : labelCssStyles
+2) Create "htmlFor" as : productName
+3) Setup "label" value as : Product Name
+4) Create "input" form with
+   1) Setup "type" as : text
+   2) Setup "name" as : name
+   3) Setup "placeHolder" as : Name
+   4) Setup "onChange" function as : handleChange
+   5) Setup "value" as : formData.name
+   6) Setup "className" as : inputCssStyles
+   7) Setip "required" field as : required
+
+##### Setup Frontend : Setup Products Form with "Price" element
+
+1) Create "label htmlFor" with "className" as : labelCssStyles
+2) Create "htmlFor" as : productPrice
+3) Setup "label" value as : Price
+4) Create "input" form with
+   1) Setup "type" as : number
+   2) Setup "name" as : price
+   3) Setup "placeHolder" as : Price
+   4) Setup "onChange" function as : handleChange
+   5) Setup "value" as : formData.price
+   6) Setup "className" as : inputCssStyles
+   7) Setip "required" field as : required
+
+##### Setup Frontend : Setup Products Form with "Stock Quantity" element
+
+1) Create "label" with "className" as : labelCssStyles
+2) Create "htmlFor" as : stockQuantity
+3) Setup "label" value as : Stock Quantity
+4) Create "input" form with
+   1) Setup "type" as : number
+   2) Setup "name" as : stockQuantity
+   3) Setup "placeHolder" as : Stock Quantity
+   4) Setup "onChange" function as : handleChange
+   5) Setup "value" as : formData.stockQuantity
+   6) Setup "className" as : inputCssStyles
+   7) Setip "required" field as : required
+
+##### Setup Frontend : Setup Products Form with "Rating" element
+
+1) Create "label" with "className" as : labelCssStyles
+2) Create "htmlFor" as : rating
+3) Setup "label" value as : Rating
+4) Create "input" form with
+   1) Setup "type" as : number
+   2) Setup "name" as : rating
+   3) Setup "placeHolder" as : Rating
+   4) Setup "onChange" function as : handleChange
+   5) Setup "value" as : formData.rating
+   6) Setup "className" as : inputCssStyles
+   7) Setip "required" field as : required
+
+##### Setup Frontend : Setup Products Form with "Create Action" element
+
+1) Create "button" object for "Creating" with
+   1) Create "type" as : submit
+   2) Create "className" as : "mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+   3) Create "button" name as : Create
+2) Create "button" object for "Cancelling" with
+   1) Create "onClick" function as : onClose
+   2) Create "type" as : button
+   3) Create "className" as : "ml-2 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700"
+   4) Create "button" name as : Cancel
