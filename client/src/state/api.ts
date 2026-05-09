@@ -1,6 +1,5 @@
 // Init Setip : api.ts
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-// import build from "next/dist/build";
 
 // Create API Fields
 export interface Product {
@@ -64,17 +63,40 @@ export interface User {
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
   reducerPath: "api",
-  tagTypes: ["DashboardMetrics"],
+  tagTypes: ["DashboardMetrics", "Products"],
   endpoints: (build) => ({
+    // Dashboard Section
     getDashboardMetrics: build.query<DashboardMetrics, void>({
       query: () => "/dashboard",
       providesTags: ["DashboardMetrics"],
     }),
+    // Products Section
+    getProducts: build.query<Product[], string | void>({
+      query: (search) => ({
+        url: "/products",
+        params: search ? { search } : {},
+      }),
+      providesTags: ["Products"],
+    }),
+    createProduct: build.mutation<Product, NewProduct>({
+      query: (newProduct) => ({
+        url: "/products",
+        method: "POST",
+        body: newProduct,
+      }),
+      invalidatesTags: ["Products"],
+    }),
+    // User Section
+
+    // Expense Section
+
   }),
 });
 
 export const {
   useGetDashboardMetricsQuery,
+  useGetProductsQuery,
+  useCreateProductMutation,
 } = api;
 
 

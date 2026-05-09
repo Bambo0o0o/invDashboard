@@ -1,11 +1,13 @@
 # Build MERN financeDashboard(Using SQL instead of NoSQL)
 
-Last building time : 03:42:43 /07:04:56 (Expense Summary)
+Last building time : 04:05:35 /07:04:56 (Expense Summary)
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
 
 ***Support NodeJS 20.19+
+
+## Connection service : PostgresSQL-->Backend-->Frontend (Remind :pgAdmin4 is not a server just Interface)
 
 <!-- Shortkey -->
 0) ***Open command guide : ctrl+space***
@@ -397,7 +399,7 @@ git push -u origin main
    3) In Right side navBar setup button by adding "toggleDarkMode" to onClick function
    4) Setup switch icon from light/dark as : moon and sun icon
 
-## Setup backend(Server) : to render data from database
+## Setup backend(Server) : Tools
 
 ### Setup local database : Postgres
 
@@ -500,7 +502,7 @@ git push -u origin main
 
 ### Setup Backend : API as Dashboard for Expenses, Products, Sales, Puchases
 
-#### Setup Backend : Controllers and Routes
+## Setup Backend : Controllers and Routes for Dashboard-Home
 
 1) Create "controllers" folder in src folder
 2) Create {dashboardController.ts} file in there
@@ -523,6 +525,8 @@ git push -u origin main
    3) Testing Home route as : curl <http://localhost:8000/dashboard>
    4) Result will get set of datas as : {"popularProducts":[{"productId":"000a8c23-5bca-436c-a216-4e747a94c511","name":"Yew Plum Pine","price":196.27,"rating":1.6,"stockQuantity":967173},{"productId":"25d01c80-bca1-4a00-b1d0-0fbd39ff9e89","name":"Simpson's Rosinweed","price":184.41,"rating":1.98,"stockQuantity":953695},...]}
    5) Terminal result will be : 127.0.0.1 - - [30/Apr/2026:14:16:57 +0000] "GET /dashboard HTTP/1.1" 200 5074
+
+## Setup Frontend : Homepage or Dashboard
 
 ### Setup Frontend : Dashboard render data from local server PostgresSQL
 
@@ -924,3 +928,104 @@ git push -u origin main
       2) Setup "amount" as : "200.00"
       3) Setup "changePercentage" as : -10
       4) Setup "IconComponent" as : TrendingDown        .....Time Stamp : 03:56:56
+
+***Start with Backend to Frontend will make easier to handling***
+
+## Setup Backend : Controllers and Routes for Products and Inventory
+
+### Setup Backend : Setup files for productController and productRoutes
+
+***We make different backend query to be make easier to handling frontend when data musch different***
+<!-- Product Controller -->
+1) Create {productController.ts} file in server/src/controllers
+2) Import "Request, Response" from express
+3) Import "PrismaClient" from @prisma/client
+4) Create "prisma" parameter for work with database client as : new PrismaClient()
+<!-- Product Router -->
+1) Create {productRoutes.ts} file in server/src/routes
+2) Import Router from express
+3) Import "createProduct, getProducts" from /controllers/productController
+4) Create "router" parameter for setup route to database as : Router()
+5) Create "getProducts" route as : router.get("/", getProducts)
+6) Create "createProduct" route as :router.post("/", createProduct)
+7) Export default as : router
+
+#### Setup Backend : Create product route
+
+1) Go to {index.ts} file in server/src
+2) Import "productRoutes" from /routes/productRoutes
+3) Adding "product" route as : app.use("/products", productRoutes) 
+4) Products local route : <http://localhost:8000/products>
+
+#### Setup Backend : getProducts function
+
+1) Create "getProducts" with async funciton as : const getProducts = async ():Promise<void>=>{}
+2) Setup "req, res" parameters as : Request, Response
+3) Setup query datas with
+   1) Setup "search" as : req.query.search?.toString()
+   2) Setup "products" as : await prisma.products.findMany({})
+   3) Setup return data as : res.json(products)
+4) Setup check "error" with : res.status(500).json({ message: "Error retrieving products" })
+
+#### Setup Backend : createProduct function
+
+1) Create "createProduct" with async funciton as : const createProduct = async ():Promise<void>=>{}
+2) Setup "req, res" parameters as : Request, Response
+3) Setup query datas with
+   1) Setup "productId, name, price, rating, stockQuantity" as : req.body
+   2) Setup "product" schema as : await prisma.products.create({})
+      1) Setup "data" as : productId, name, price, rating, stockQuantity
+   3) Setup return data as : res.status(201).json(product)
+4) Setup check "error" with : res.status(500).json({ message: "Error creating product" })          .....Time Stamp : 03:56:56
+
+#### Setup Backend : Testing backend fetch data fine
+
+1) Turn on "connection server" on "PostgresSQL" to fetching data from database
+2) Go to "terminal" with "client" path run : curl http://localhost:8000/products
+3) Result will get "product schema" as : [{"productId":"d35623ee-bef6-42b2-8776-2f99f8bb4782","name":"Pinkscale Blazing Star","price":456.04,"rating":2.25,"stockQuantity":124834},...]
+4) Testing with "postman" software with "GET" and url as : http://localhost:8000/products
+   ***Don't forget to "delete" a "postman" folder in both path otherwise it don't launch :***
+   ***path local : C:\Users\pramo\AppData\Local***
+   ***path Roaming : C:\Users\pramo\AppData\Roaming***
+5) Check "terminal" server on vscode will get : 
+   127.0.0.1 - - [03/May/2026:13:21:25 +0000] "GET /products HTTP/1.1" 200 4546         ...It fetching find
+   ***Don't forget to turn on "PostgresSQL" otherwise It will get error as :***
+   ***127.0.0.1 - - [03/May/2026:13:24:34 +0000] "GET /products HTTP/1.1" 500***        ...Time Stamp : 04:05:50
+
+### Setup Frontend : Setup products connection from frontend to backend
+
+1) Go to {api.ts} file in client/src/state
+2) Create "getProduct" connect to backend as ==> getProducts: build.query<Product[], string | void>({})
+3) Adding "tagTypes" with : "Products"
+4) Create "createProduct" connect to backend as ==> createProduct: build.mutation<Product, NewProduct>({})
+5) Adding "useGetProductsQuery" and "usedCreateProductMutation" to : export const{...} = api
+
+#### Setup Fronted : Setup inventrory page (With Header and Table components using MUI data grid tool)
+
+1) Create "inventory" folder in client/src/app
+2) Create {page.tsx} file in inventory folder
+3) Using template : tsrafce
+4) Rename "page" to : Inventory
+5) Remove : Props
+6) Remove : Import react
+7) Adding "use client" on top of file
+8) Create "Inventory" function as : const Inventory = () => {}
+    1) Create parameters "data: products, isError, isLoading" as : useGetProductsQuery()
+    2) Import useGetProductsQuery from /state/api
+   ***Testing page as : console.log("products: ",products);***
+   ***Go to url as : localhost:3000/inventory***
+   ***Check Chrome development tools as : Network tab ==> will See products schema on Fetch/XHR as Header***
+
+
+9) Create array data of "columns" as : GridColDef[]=[{}]
+    1) Create "productId" parameters as ==> field: "productId", headerName: "ID", width: 90
+    2) Create "name" parameters as ==> field: "name", headerName: "Product Name", width: 200 
+    3) Create "price" parameters as ==> field: "price", headerName: "Price", width: 110, type: "number", valueGetter: (value, row) => `$${row.price}`,
+    4) Create "rating" parameters as ==> field: "rating", headerName: "Rating", width: 110, type: "number",valueGetter: (value, row) => (row.rating ? row.rating : "N/A")
+    5) Create "stockQuantity" parameter as ==> field: "stockQuantity", headerName: "Stock Quantity", width: 150, type: "number"
+10) Create "return" function as
+    1) Create "div" tag with "className" as : "flex flex-col"
+    2) Create "Header" tag with "name" as : "Inventory"
+    3) Create "DataGrid" tag and setup : rows, columns, getRowID, checkboxSelection
+    4) Create "className" as : "bg-white shadow rounded-lg border border-gray-200 mt-5 !text-gray-700"
+11) Export default as : Inventory
