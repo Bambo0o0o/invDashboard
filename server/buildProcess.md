@@ -1061,7 +1061,7 @@ git push -u origin main
 9) Create "state" function with useState("false") as : isModalOpen, setIsModalOpen
 10) Create "data: products, isLoading, isError " as : useGetProductsQuery(searchTerm)
 11) Create "createProduct" as : useCreateProductMutation()
-12) Create "handleCreateProduct" function as : (productData: ProductFormData) => {}
+12) Create "handleCreateProduct" function as : (productData: ProductFormData) => { await createProduct(productData);}
 13) Checking "data was fetch" correct with : if (isLoading) {return Loading...}
 14) Checking "catchup Error or Products not existed" with : if (isError || !products){return Failed to fetch products}
 15) Create "return()" function as : Search Bar, Header Bar, Body Product List and Modal
@@ -1085,8 +1085,10 @@ git push -u origin main
 3) Create "button" object with
    1) Create "className" as : "flex items-center bg-blue-500 hover:bg-blue-700 text-gray-200 font-bold py-2 px-4 rounded"
    2) Create "onClick" function as : () => setIsModalOpen(true)
+   3) Adding "PlusCircleIcon" icon or "Adding icon" with "className" as :"w-5 h-5 mr-2 !text-gray-200"
+   4) Adding "text Button" as : Create Product
 
-##### Setup Frontend : Setup Products Page with "Body Products List" element
+##### Setup Frontend : Setup Products Page with "Body Products List" element using "Grid Layout"
 
 1) Create "div" with "className" as : "grid grid-cols-1 sm:grid-cols-2 lg-grid-cols-3 gap-10 justify-between"
 2) Create "Prodcuct" fetching data function to check data was fetched from backend
@@ -1099,6 +1101,7 @@ git push -u origin main
       2) Setup "alt" as : product.name
       3) Setup "width" and "height" as : 150, 150
       4) Create "className" as : "mb-3 rounded-2xl w-36 h-36"
+      ***Now using just "image" text***
    6) Create "Header" text with "h3" tag and "className" as : "text-lg text-gray-900 font-semibold"
    7) Setup "Header" text as : product.name
    8) Create "Paragraph" text with "p" tag and "className" as : "text-gray-800"
@@ -1121,29 +1124,42 @@ git push -u origin main
 1) Create {CreateProductModal.tsx} in "products" folder
 2) Using template : tsrafce
 3) Rename "page" to : CreateProductModal
-4) Modify "Type Props" with : ProductFormData and CreateProductModalProps
-   1) Setup "ProductFormData" with : name, price, stockQuantity, rating
-   2) Setup "CreateProductModalProps" with : isOpen, onClose function, onCreate funciton
-5) Create CreateProductModal with
-   1) Declaring functions with : isOpen, onClose, onCreate
-   2) Create "CreateProductModalProps" function to handling "create product" form with
-      1) Create "useState()" function for "formData, setFormData" with : productId, name, price, stockQuantity, rating
-      2) Create "handleChange" function to handling data adding as : (e: ChangeEvent<HTMLInputElement>) => {}
-      3) Create "handleSubmit" function to handling data summitning as : (e: FormEvent<HTMLFormElement>) => {}
-      4) Create "not isOpen" function as : retrun null
-      5) Create "labelCssStyles" for "reusable" with css format as : "block text-sm font-medium text-gray-700"
-      6) Create "inputCssStyles" for "reusable" with css format as : "block w-full mb-2 p-2 border-gray-500 border-2 rounded-md"
-   3) Create "return()" function with
-      1) Create "div" with "className" as : "fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-20"
-      2) Create "div" with "className" as : "relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
-      3) Create "Header" name as : "Create New Product"
-      4) Create "Form" with "className" for "onSubmit" function as : "mt-5"
-      5) Create "onSubmit" function as : handleSubmit
-      6) Create "Form Elements" with : Product Name, Price, Stock Quantity, Rating, Create Actions
+4) Import "useCreateProductMutation, useGetProductsQuery" from /state/api
+5) Import "PlusCircleIcon, SearchIcon" from lucide-react
+6) Import "useState" from react
+7) Import "Header" from /app/(components)/Header
+8) Import "Rating" from /app/(components)/Rating
+9) Import "CreateProductModal" from /CreateProductModal
+10) Import "Image" from next/image
+11) Modify "Type Props" with : ProductFormData and CreateProductModalProps
+    1) Setup "ProductFormData" with : name, price, stockQuantity, rating
+    2) Setup "CreateProductModalProps" with : isOpen, onClose function, onCreate funciton
+12) Create CreateProductModal with
+    1) Declaring functions with : isOpen, onClose, onCreate
+    2) Create "CreateProductModalProps" function to handling "create product" form with
+         1) Create "useState()" function for "formData, setFormData" with : productId, name, price, stockQuantity, rating
+
+         ***hangleChange Reusable function***
+         2) Create "handleChange" function to handling data adding as : (e: ChangeEvent<HTMLInputElement>) => {const {name, value} = e.target; setFormData({...formData,[name]:name==="price"||name==="stockQuantity"||name==="rating" ? parseFloat(value):value,});}
+
+         ***hangleSubmit Reusable function***
+         3) Create "handleSubmit" function to handling data summitning as : (e: FormEvent<HTMLFormElement>) => {e.preventDefault(); onCreate(formData); onClose();}
+         4) Create if-condition "!isOpen" function as : retrun null
+
+         ***Create "Reusable Style" : labelCssStyles and inputCssStyles***
+         5) Create "labelCssStyles" with css format as : "block text-sm font-medium text-gray-700"
+         6) Create "inputCssStyles" with css format as : "block w-full mb-2 p-2 border-gray-500 border-2 rounded-md"
+    3) Create "return()" function with
+         1) Create "div" with "className" as : "fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-20"
+         2) Create "div" with "className" as : "relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+         3) Create "Header" tag with name as : "Create New Product"
+         4) Create "Form" with "className" for "onSubmit" function as : "mt-5"
+         5) Create "onSubmit" function as : handleSubmit
+         6) Create "Form Elements" with : Product Name, Price, Stock Quantity, Rating, Create Actions
 
 ##### Setup Frontend : Setup Products Form with "Product Name" element
 
-1) Create "label" with "className" as : labelCssStyles
+1) Create "label" with "className" as : labelCssStyles (Reusable style)
 2) Create "htmlFor" as : productName
 3) Setup "label" value as : Product Name
 4) Create "input" form with
@@ -1152,12 +1168,12 @@ git push -u origin main
    3) Setup "placeHolder" as : Name
    4) Setup "onChange" function as : handleChange
    5) Setup "value" as : formData.name
-   6) Setup "className" as : inputCssStyles
+   6) Setup "className" as : inputCssStyles (Reusable style)
    7) Setip "required" field as : required
 
 ##### Setup Frontend : Setup Products Form with "Price" element
 
-1) Create "label htmlFor" with "className" as : labelCssStyles
+1) Create "label htmlFor" with "className" as : labelCssStyles (Reusable style)
 2) Create "htmlFor" as : productPrice
 3) Setup "label" value as : Price
 4) Create "input" form with
@@ -1166,12 +1182,12 @@ git push -u origin main
    3) Setup "placeHolder" as : Price
    4) Setup "onChange" function as : handleChange
    5) Setup "value" as : formData.price
-   6) Setup "className" as : inputCssStyles
+   6) Setup "className" as : inputCssStyles (Reusable style)
    7) Setip "required" field as : required
 
 ##### Setup Frontend : Setup Products Form with "Stock Quantity" element
 
-1) Create "label" with "className" as : labelCssStyles
+1) Create "label" with "className" as : labelCssStyles (Reusable style)
 2) Create "htmlFor" as : stockQuantity
 3) Setup "label" value as : Stock Quantity
 4) Create "input" form with
@@ -1180,12 +1196,12 @@ git push -u origin main
    3) Setup "placeHolder" as : Stock Quantity
    4) Setup "onChange" function as : handleChange
    5) Setup "value" as : formData.stockQuantity
-   6) Setup "className" as : inputCssStyles
+   6) Setup "className" as : inputCssStyles (Reusable style)
    7) Setip "required" field as : required
 
 ##### Setup Frontend : Setup Products Form with "Rating" element
 
-1) Create "label" with "className" as : labelCssStyles
+1) Create "label" with "className" as : labelCssStyles (Reusable style)
 2) Create "htmlFor" as : rating
 3) Setup "label" value as : Rating
 4) Create "input" form with
@@ -1194,10 +1210,10 @@ git push -u origin main
    3) Setup "placeHolder" as : Rating
    4) Setup "onChange" function as : handleChange
    5) Setup "value" as : formData.rating
-   6) Setup "className" as : inputCssStyles
+   6) Setup "className" as : inputCssStyles (Reusable style)
    7) Setip "required" field as : required
 
-##### Setup Frontend : Setup Products Form with "Create Action" element
+##### Setup Frontend : Setup Products Form with "Create Action" element(button)
 
 1) Create "button" object for "Creating" with
    1) Create "type" as : submit
