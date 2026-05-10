@@ -58,12 +58,11 @@ export interface User {
   email: string;
 }
 
-
 // Create API to calling data from backend
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
   reducerPath: "api",
-  tagTypes: ["DashboardMetrics", "Products"],
+  tagTypes: ["DashboardMetrics", "Products", "Users"],
   endpoints: (build) => ({
     // Dashboard Section
     getDashboardMetrics: build.query<DashboardMetrics, void>({
@@ -87,9 +86,11 @@ export const api = createApi({
       invalidatesTags: ["Products"],
     }),
     // User Section
-
+    getUsers: build.query<User[], void>({
+      query: () => "/users",
+      providesTags: ["Users"],
+    }),
     // Expense Section
-
   }),
 });
 
@@ -97,9 +98,8 @@ export const {
   useGetDashboardMetricsQuery,
   useGetProductsQuery,
   useCreateProductMutation,
+  useGetUsersQuery,
 } = api;
-
-
 
 // // Complete Setup : api.ts
 // import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";

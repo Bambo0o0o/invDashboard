@@ -1,6 +1,6 @@
 # Build MERN financeDashboard(Using SQL instead of NoSQL)
 
-Last building time : 04:25:25 /07:04:56 (Expense Summary)
+Last building time : 05:00:20 /07:04:56 (Expense Summary)
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
@@ -538,6 +538,9 @@ git push -u origin main
    3) Adding "DashboardMetrics" contain with{from dashboardController.ts} file : popularProducts, salesSummary, purchaseSummary, expenseSummary, expenseByCategorySummary
    4) Adding export interface above "DashboardMetrics" as : Product, NewProduct, SalesSummary, PurchaseSummary, ExpenseSummary, ExpenseByCategorySummary
    5) Adding export interface below "DashboardMetrics" as : User
+      1) Setup "userId" as : string
+      2) Setup "name" as : string
+      3) Setup "email" as : string
 
 #### Setup frontend : Setup layout page 3 columns and n rows on each column
 
@@ -932,7 +935,7 @@ git push -u origin main
 
 ***Start with Backend to Frontend will make easier to handling***
 
-## Setup Backend : Controllers and Routes for Products and Inventory
+## Setup Backend : Create controllers and routes for "Products" and "Inventory"
 
 ### Setup Backend : Setup files for productController and productRoutes
 
@@ -1034,7 +1037,7 @@ git push -u origin main
 12) Import Header from @mui/x-data-grid
 13) Create "DataGrid" tag and setup : rows, columns, getRowID, checkboxSelection
     ***Columns we hard code on this file because it didn't fetching data from database, So it is static data***
-14) Create array data of "columns" as : GridColDef[]=[{}]
+14) Create "Inventory" array data of "columns" as : GridColDef[]=[{}]
     1) Import "GridColDef" from @mui/x-data-grid
     ***Row data come with "products" which create by backend***
     2) Create "productId" parameters as ==> field: "productId", headerName: "ID", width: 90
@@ -1224,3 +1227,67 @@ git push -u origin main
    2) Create "type" as : button
    3) Create "className" as : "ml-2 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700"
    4) Create "button" name as : Cancel
+
+## Setup Backend : Create controller and routes for "User"
+
+### Setup Backend : Setup files for userController
+
+1) Create {userController.ts} in server/src/controllers folder
+2) Import "Request, Response" from express
+3) Import "PrismaClient" from @prisma/client
+4) Create "prisma" as : new PrismaClient()
+5) Export const getUsers as : async (req: Request, res: Response): Promise<> => {try{} catch(error){}}
+   1) Setup "try" as : const users = await prisma.users.findMany() and res.json(users)
+   2) Setup "catch" error as : res.status(500).json({ message: "Error retrieving users" })
+
+### Setup Backend : Setup files for userRoutes
+
+1) Create {userRoutes.ts} in server/src/routes folder
+2) Impot "Router" from express
+3) Import "getUser" from ../controllers/userController
+4) Create "router" as : Router();
+5) Create route for user as : router.get("/", getUsers)
+6) Export default as : router
+
+### Setup Backend : Setup userRoutes to index.ts
+
+1) Import userRoutes from /routes/userRoutes
+2) Create "url" routes for user as : app.use("/users", userRoutes)
+3) Check "userRoutes" work fine with client terminal as : curl http://localhost:8000/users
+4) Can used "postman" app with url as : http://localhost:8000/users
+
+### Setup Frontend : Setup Users data connection from fronted to backend
+
+1) Go to {api.ts} then create "userApi"
+   1) Adding "tagTypes" with : "Users"
+   2) Create "getUsers" as : build.query<User[], void>({})
+   3) Create "query" as : () => "/users"
+   4) Create "providesTags" as : ["Users"]
+   5) Setup "export const" with : useGetUsersQuery
+
+### Setup Frontend : Setup Users page
+
+1) Create "users" folder in client/src/app folder
+2) Create {page.tsx} file in client/src/app/users folder
+3) Create template with : tsrafce
+4) Remove : Types Props
+5) Remove : Import react
+6) Create "User" array data of "columns" as : GridColDef[]=[{}]
+7) Import "GridColDef" from @mui/x-data-grid
+  ***Row data come with "products" which create by backend***
+8) Create "userId" parameters as ==> field: "userId", headerName: "ID", width: 90
+9) Create "name" parameters as ==> field: "name", headerName: "Name", width: 200
+10) Create "email" parameters as ==> field: "email", headerName: "Email", width: 200
+11) Create "data: users, isError, isLoading" in "Users" function as : useGetUsersQuery()
+12) Checking "data was fetch" correct with : if (isLoading) {return Loading...}
+13) Checking "catchup Error or Uses not existed" with : if (isError || !users){return Failed to fetch products}
+14) Create "return()" function as : Header and DataGrid
+    1) Create "div" with "className" as : "flex flex-col"
+    2) Create "Header" name as : "Users"
+    3) Create "DataGrid" with
+       1) Setup "rows" as : {users}
+       2) Setup "columns" as : {columns}
+       3) Setup "getRowId" as : {(row) => row.userId}
+       4) Create "checkboxSelection"
+       5) Create "className" style as : "bg-white shadow rounded-lg border border-gray-200 mt-5 !text-gray-700"
+15) Export default as : Users
