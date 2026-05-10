@@ -1052,23 +1052,24 @@ git push -u origin main
 1) Create "products" folder in /client/src/app
 2) Create {page.tsx} in "products" folder
 3) Using template : tsrafce
-4) Rename "page" to : Products
-5) Changing "Type Props" to : ProductFormData
+4) Adding "use client" on top of file
+5) Rename "page" to : Products
+6) Changing "Type Props" to : ProductFormData
    1) Create "name" as : string
    2) Create "price" as : number
    3) Create "stockQuantity" as : number
    4) Create "rating" as : number
-6) Remove : Import react
-7) Adding "use client" on top of file
-8) Create "state" function with useState("") as : searchTerm, setSearchTerm
-9) Create "state" function with useState("false") as : isModalOpen, setIsModalOpen
-10) Create "data: products, isLoading, isError " as : useGetProductsQuery(searchTerm)
-11) Create "createProduct" as : useCreateProductMutation()
-12) Create "handleCreateProduct" function as : (productData: ProductFormData) => { await createProduct(productData);}
-13) Checking "data was fetch" correct with : if (isLoading) {return Loading...}
-14) Checking "catchup Error or Products not existed" with : if (isError || !products){return Failed to fetch products}
-15) Create "return()" function as : Search Bar, Header Bar, Body Product List and Modal
-16) Create "div" with "className" to covering "return()" function's elements as : "mx-auto pb-5 w-full"
+7) Remove : Import react
+8) Adding "use client" on top of file
+9) Create "state" function with useState("") as : searchTerm, setSearchTerm
+10) Create "state" function with useState("false") as : isModalOpen, setIsModalOpen
+11) Create "data: products, isLoading, isError " as : useGetProductsQuery(searchTerm)
+12) Create "createProduct" as : useCreateProductMutation()
+13) Create "handleCreateProduct" function as : (productData: ProductFormData) => { await createProduct(productData);}
+14) Checking "data was fetch" correct with : if (isLoading) {return Loading...}
+15) Checking "catchup Error or Products not existed" with : if (isError || !products){return Failed to fetch products}
+16) Create "return()" function as : Search Bar, Header Bar, Body Product List and Modal
+17) Create "div" with "className" to covering "return()" function's elements as : "mx-auto pb-5 w-full"
 
 ##### Setup Frontend : Setup Products Page with "Search Bar" element
 
@@ -1265,23 +1266,24 @@ git push -u origin main
    4) Create "providesTags" as : ["Users"]
    5) Setup "export const" with : useGetUsersQuery
 
-### Setup Frontend : Setup Users page
+#### Setup Frontend : Setup Users page
 
 1) Create "users" folder in client/src/app folder
 2) Create {page.tsx} file in client/src/app/users folder
 3) Create template with : tsrafce
-4) Remove : Types Props
-5) Remove : Import react
-6) Create "User" array data of "columns" as : GridColDef[]=[{}]
-7) Import "GridColDef" from @mui/x-data-grid
-  ***Row data come with "products" which create by backend***
-8) Create "userId" parameters as ==> field: "userId", headerName: "ID", width: 90
-9) Create "name" parameters as ==> field: "name", headerName: "Name", width: 200
-10) Create "email" parameters as ==> field: "email", headerName: "Email", width: 200
-11) Create "data: users, isError, isLoading" in "Users" function as : useGetUsersQuery()
-12) Checking "data was fetch" correct with : if (isLoading) {return Loading...}
-13) Checking "catchup Error or Uses not existed" with : if (isError || !users){return Failed to fetch products}
-14) Create "return()" function as : Header and DataGrid
+4) Adding "use client" on top of file
+5) Remove : Types Props
+6) Remove : Import react
+7) Create "User" array data of "columns" as : GridColDef[]=[{}]
+8) Import "GridColDef" from @mui/x-data-grid
+   ***Row data come with "products" which create by backend***
+9) Create "userId" parameters as ==> field: "userId", headerName: "ID", width: 90
+10) Create "name" parameters as ==> field: "name", headerName: "Name", width: 200
+11) Create "email" parameters as ==> field: "email", headerName: "Email", width: 200
+12) Create "data: users, isError, isLoading" in "Users" function as : useGetUsersQuery()
+13) Checking "data was fetch" correct with : if (isLoading) {return Loading...}
+14) Checking "catchup Error or Uses not existed" with : if (isError || !users){return Failed to fetch products}
+15) Create "return()" function as : Header and DataGrid
     1) Create "div" with "className" as : "flex flex-col"
     2) Create "Header" name as : "Users"
     3) Create "DataGrid" with
@@ -1290,4 +1292,61 @@ git push -u origin main
        3) Setup "getRowId" as : {(row) => row.userId}
        4) Create "checkboxSelection"
        5) Create "className" style as : "bg-white shadow rounded-lg border border-gray-200 mt-5 !text-gray-700"
-15) Export default as : Users
+16) Export default as : Users
+
+### Setup Frontend : Setup Users Setting (Just mockSetting didn't connect to backend) : 05:00:55
+
+1) Create "settings" folder in client/src/app folder
+2) Create {page.tsx} in client/src/app/setting folder
+3) Create template with : tsrafce
+4) Change "page" to : Settings
+5) Adding "use client" on top of file
+6) Change "Type Props" to : UserSetting
+   1) Setup "label" as : string
+   2) Setup "value" as : string | boolean
+   3) Setup "type" as : "text" | "toggle"
+7) Import "React, {useState}" as react
+8) Import "Header" from  @/app/(components)/Header
+9) Create "mockSettings" as "UserSetting[]" array with
+   1) Setup "Username" with : label: "Username", value: "john_doe", type: "text"
+   2) Setup "Email" with : label: "Email", value: "john.doe@example.com", type: "text"
+   3) Setup "Notification" with : label: "Notification", value: true, type: "toggle"
+   4) Setup "Dark Mode" with : label: "Dark Mode", value: false, type: "toggle"
+   5) Setup "Language" with : label: "Language", value: "English", type: "text"
+10) Create "Setting" function as : const Settings = () => {... return()}
+    1) Create "userSettings, setUserSettings" array with : useState<UserSetting[]>(mockSettings)
+    2) Create "handleToggleChange" function as : const handleToggleChange = (index: number) => {}
+    3) Setup "settingsCopy" as : [...userSettings]
+    4) Setup "settingsCopy[index].value" as : !settingsCopy[index].value as boolean
+    5) Setup "setUserSettings" as : setUserSettings(settingsCopy)
+11) Create "return()" function with
+    1) Create "div" with "className" as : "w-full"
+    2) Create "Header" name as : "User Settings"
+    3) Create "div" with "className" as : "overflow-x-auto mt-5 shadow-md"
+    4) Create "table" tag with "className" as : "min-w-full bg-white rounded-lg"
+    5) Create "thread" tag with "className" as : "bg-gray-800 text-white"
+    6) Create "tr" tag
+    7) Create "th" tag with "className" as : "text-left py-3 px-4 uppercase font-semibold text-sm"
+    8) Setup "Name" as : Setting
+    9) Create "th" tag with "className" as : "text-left py-3 px-4 uppercase font-semibold text-sm"
+    10) Setup "Name" as : Value
+    11) Create "tbody" tag
+    12) Create "userSetting" mapping function as : userSettings.map((setting, index) => ())
+    13) Create "tr" (table row) tag with "className" as : "hover:bg-blue-50"
+    14) Setup "key" for "tr" tag as : setting.label
+    15) Create "td" (table data)tag with "className" as : "py-2 px-4"
+    16) Setup "key" for "tr" tag as : setting.label
+    17) Create "td" tag with "className" as : "py-2 px-4"
+    18) Create "setting.type" as : setting.type === "toggle" ? () : ()
+        1) Create "label" with "className" as : "inline-flex relative items-center cursor-pointer"
+        2) Create "input" tag with
+           1) Setup "type" as : "checkbox"
+           2) Setup "className" as : "sr-only peer"
+           3) Setup "checked" as : setting.value as boolean
+           4) Setup "onChange" funciton as : () => handleToggleChange(index)
+        3) Create "div" with "className" as : className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-blue-400 peer-focus:ring-4 transition peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+        4) Create "input" tag with
+           1) Create "className" as : "px-4 py-2 border rounded-lg text-gray-500 focus:outline-none focus:border-blue-500"
+           2) Setup "value" as : setting.value as string
+           3) Setup "onChange" funciton as : (e) => {const settingsCopy = [...userSettings] and settingsCopy[index].value = e.target.value and setUserSettings(settingsCopy) }
+12) Export default as : Setting                             ....Time Stamp : 05:12:35
