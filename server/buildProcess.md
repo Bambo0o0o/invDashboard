@@ -1,6 +1,6 @@
 # Build MERN financeDashboard(Using SQL instead of NoSQL)
 
-Last building time : 05:00:20 /07:04:56 (Expense Summary)
+Last building time : 05:12:35 /07:04:56 (Expense Summary)
 
 link : <https://www.youtube.com/watch?v=ddKQ8sZo_v8&list=PLs0RSZipvGCQlfdgzb1o6ijSIHJ3Axq1z>
 myGitHub : <https://github.com/Bambo0o0o/financeDashboard.git>
@@ -1244,7 +1244,7 @@ git push -u origin main
 ### Setup Backend : Setup files for userRoutes
 
 1) Create {userRoutes.ts} in server/src/routes folder
-2) Impot "Router" from express
+2) Import "Router" from express
 3) Import "getUser" from ../controllers/userController
 4) Create "router" as : Router();
 5) Create route for user as : router.get("/", getUsers)
@@ -1252,19 +1252,20 @@ git push -u origin main
 
 ### Setup Backend : Setup userRoutes to index.ts
 
-1) Import userRoutes from /routes/userRoutes
-2) Create "url" routes for user as : app.use("/users", userRoutes)
-3) Check "userRoutes" work fine with client terminal as : curl http://localhost:8000/users
-4) Can used "postman" app with url as : http://localhost:8000/users
+1) Go to {index.ts} file in server/src
+2) Import userRoutes from /routes/userRoutes
+3) Create "url" routes for user as : app.use("/users", userRoutes)
+4) Check "userRoutes" work fine with client terminal as : curl http://localhost:8000/users
+5) Can used "postman" app with url as : http://localhost:8000/users
 
 ### Setup Frontend : Setup Users data connection from fronted to backend
 
 1) Go to {api.ts} then create "userApi"
-   1) Adding "tagTypes" with : "Users"
-   2) Create "getUsers" as : build.query<User[], void>({})
-   3) Create "query" as : () => "/users"
-   4) Create "providesTags" as : ["Users"]
-   5) Setup "export const" with : useGetUsersQuery
+2) Adding "tagTypes" with : "Users"
+3) Create "getUsers" as : build.query<User[], void>({})
+4) Create "query" as : () => "/users"
+5) Create "providesTags" as : ["Users"]
+6) Setup "export const" with : useGetUsersQuery
 
 #### Setup Frontend : Setup Users page
 
@@ -1350,3 +1351,47 @@ git push -u origin main
            2) Setup "value" as : setting.value as string
            3) Setup "onChange" funciton as : (e) => {const settingsCopy = [...userSettings] and settingsCopy[index].value = e.target.value and setUserSettings(settingsCopy) }
 12) Export default as : Setting                             ....Time Stamp : 05:12:35
+
+## Setup Backend : Create controller and routes for "Expenses"
+
+### Setup Backend : Setup files for expenseController
+
+1) Create {expenseController.ts} in server/src/controllers folder
+2) Import "Request, Response" from express
+3) Import "PrismaClient" from @prisma/client
+4) Create "prisma" as : new PrismaClient()
+5) Export const getExpensesByCategory as : async (req: Request, res: Response): Promise<> => {try{} catch(error){}}
+   1) Setup "try" as : 
+      1) const expenseByCategorySummaryRaw = await prisma.expenseByCategory.findMany()
+      2) const expenseByCategorySummary = expenseByCategorySummaryRaw.map()=>({})
+      3) res.json(expenseByCategorySummary)
+   2) Setup "catch" error as : res.status(500).json({ message: "Error retrieving expenses by category" })
+
+### Setup Backend : Setup files for expenseRoutes
+
+1) Create {expenseRoutes.ts} in server/src/routes folder
+2) Import "Router" from express
+3) Import "getExpensesByCategory" from ../controllers/expenseController
+4) Create "router" as : Router();
+5) Create route for expense as : router.get("/", getExpensesByCategory)
+6) Export default as : router
+
+### Setup Backend : Setup expenseRoutes to index.ts
+
+1) Go to {index.ts} file in server/src
+2) Import expenseRoutes from /routes/expenseRoutes
+3) Create "url" routes for expenses as : app.use("/expenses", expenseRoutes)
+4) Check "expenseRoutes" work fine with client terminal as : curl http://localhost:8000/expenses
+5) Can used "postman" app with url as : http://localhost:8000/expenses             ...timeStamp 05:17:17
+
+### Setup Frontend : Setup Expenses data connection from fronted to backend
+
+1) Go to {api.ts} then create "expensesApi"
+2) Adding "tagTypes" with : "Expenses"
+3) Create "getUsers" as : build.query<User[], void>({})
+4) Create "query" as : () => "/users"
+5) Create "providesTags" as : ["Users"]
+6) Setup "export const" with : useGetUsersQuery
+
+
+#### Setup Frontend : Setup Expenses page
