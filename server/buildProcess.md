@@ -1283,7 +1283,7 @@ git push -u origin main
 11) Create "email" parameters as ==> field: "email", headerName: "Email", width: 200
 12) Create "data: users, isError, isLoading" in "Users" function as : useGetUsersQuery()
 13) Checking "data was fetch" correct with : if (isLoading) {return Loading...}
-14) Checking "catchup Error or Uses not existed" with : if (isError || !users){return Failed to fetch products}
+14) Checking "catchup Error or Uses not existed" with : if (isError || !users){return Failed to fetch users}
 15) Create "return()" function as : Header and DataGrid
     1) Create "div" with "className" as : "flex flex-col"
     2) Create "Header" name as : "Users"
@@ -1315,7 +1315,7 @@ git push -u origin main
    4) Setup "Dark Mode" with : label: "Dark Mode", value: false, type: "toggle"
    5) Setup "Language" with : label: "Language", value: "English", type: "text"
 10) Create "Setting" function as : const Settings = () => {... return()}
-    1) Create "userSettings, setUserSettings" array with : useState<UserSetting[]>(mockSettings)
+    1) Create "userSettings, setUserSettings" state with : useState<UserSetting[]>(mockSettings)
     2) Create "handleToggleChange" function as : const handleToggleChange = (index: number) => {}
     3) Setup "settingsCopy" as : [...userSettings]
     4) Setup "settingsCopy[index].value" as : !settingsCopy[index].value as boolean
@@ -1388,10 +1388,142 @@ git push -u origin main
 
 1) Go to {api.ts} then create "expensesApi"
 2) Adding "tagTypes" with : "Expenses"
-3) Create "getUsers" as : build.query<User[], void>({})
-4) Create "query" as : () => "/users"
-5) Create "providesTags" as : ["Users"]
-6) Setup "export const" with : useGetUsersQuery
-
+3) Create "getExpensesByCategory" as : build.query<ExpenseByCategorySummary[], void>({})
+4) Create "query" as : () => "/expenses"
+5) Create "providesTags" as : ["Expenses"]
+6) Setup "export const" with : useGetExpensesByCategoryQuery
 
 #### Setup Frontend : Setup Expenses page
+
+1) Create "expenses" folder in client/src/app folder
+2) Create {page.tsx} file in client/src/app/expenses folder
+3) Create template with : tsrafce
+4) Adding "use client" on top of file
+5) Remove : Types Props
+6) Remove : Import react
+7) Create "states" as
+   1) Create "activeIndex, setActiveIndex" as : useState(0)
+   2) Create "selectedCategory, setSelectedCategory" as : useState("All")
+   3) Create "startDate, setStartDate" as : useState("")
+   4) Create "endDate, setEndDate" as : useState("")
+   5) Import "useState" from react
+8) Create "Loading and Error Check"
+   1) Create "data" query with "expensesData, isLoading, isError" as : useGetExpensesByCategoryQuery()
+   2) Checking "data was fetch" correct with : if (isLoading) {return Loading...}
+   3) Checking "catchup Error or Uses not existed" with : if (isError || !expenses){return Failed to fetch expenses}                                                                  ...timeStamp : 05:21:25
+9) Create "expenses" with "useMemo()" function as : useMemo(() => expensesData ?? [], [expensesData])
+10) Create "return()" function with : Header, Filters, Category, Start date, End date, Pie Chart.
+11) Create "div" tag to cover others parts
+12) Export "default" as : Expenses
+
+#### Setup Frontend : Setup Expenses Page with "parseDate" function
+
+1) Create "parseDate" with : (dateString: string) => {}
+   1) Create "date" parameter as : new Date(dateString)
+   2) Create "return" value as : date.toISOString().split("T")[0]
+
+#### Setup Frontend : Setup Expenses Page with "aggregatedData" function
+
+1) Create "aggregatedData" for "AggregatedDataItem[]" array as : useMemo()
+2) Setup "expenses" for "filter" with
+   1) Setup "filtered" as : AggregatedData = expenses.filter((data: ExpenseByCategorySummary) => {})
+   2) Setup "matchesCategory" as : selectedCategory === "All" || data.category === selectedCategory
+   3) Setup "dataDate" as : parseDate(data.date)
+   4) Setup "matchesDate" as : !startDate || !endDate || (dataDate >= startDate && dataDate <= endDate)
+   5) Setup "return" value as : matchesCategory && matchesDate
+3) Setup "expenses" for "reduce" with
+   1) Setup "amount" as : parseInt(data.amount)
+   2) Setup "if" condition for "(!acc[data.category]) {}"
+      1) Setup "acc[data.category]" as : { name: data.category, amount: 0 }
+      2) Setup "acc[data.category].color" as : `#${Math.floor(Math.random() * 16777215).toString(16)}`
+      3) Setup "acc[data.category].amount" as : += amount
+      4) Setup "return" value as : acc
+4) Setup "return" Object.values() as : filtered
+5) Setup output for "useMemo()" with : [expenses, selectedCategory, startDate, endDate]
+
+#### Setup Frontend : Setup Expenses page with "className" resuable
+
+1) Create "className" with
+   1) Setup "label" as : "block text-sm font-medium text-gray-700"
+   2) Setup "selectInput" as : "mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+
+##### Setup Frontend : Setup Expenses Page with "Heaader" element
+
+1) Create "div" with "className" as : "mb-5"
+2) Create "Header" tag with "name" as : "Expenses"
+3) Create "paragraph" tag with "className" as : "text-sm text-gray-500"
+4) Create "paragraph" text as : A visual representation of expenses over time
+
+##### Setup Frontend : Setup Expenses Page with "Filters" element cover "Category", "Start Date", "End Date", "Pie Chart"
+
+1) Create "div" with "className" as : "flex flex-col md:flex-row justify-between gap-4"
+2) Create "div" with "className" as : "w-full md:w-1/3 bg-white shadow rounded-lg p-6"
+3) Create "header" tag(h3) with "className" as : "text-lg font-semibold mb-4"
+4) Create "header" text with : Filter by Category and Date
+5) Create "div" with "className" as : "space-y-4"
+
+###### Setup Frontend : Setup Expenses Page with "Category" element
+
+1) Create "div" tag
+2) Create "labe" tag with "htmlFor" value as : "category"
+3) Create "className" for "label" tag as : {classNames.label}
+4) Create "labe" text as : Category
+5) Create "select" tag with
+   1) Setup "id" as : "category"
+   2) Setup "name" as : "category"
+   3) Setup "className" as : {classNames.selectInput}
+   4) Setup "defaultValue" as : "All"
+   5) Setup "onChange" function as : (e) => setSelectedCategory(e.target.value)
+   6) Create "option" tag as : All
+   7) Create "option" tag as : Office
+   8) Create "option" tag as : Professional
+   9) Create "option" tag as : Salaries
+
+###### Setup Frontend : Setup Expenses Page with "Start Date" element
+
+1) Create "div" tag
+2) Create "label" tag with "htmlFor" as : "start-date"
+3) Create "className" for "label" tag as : {classNames.label}
+4) Create "label" text as : Start Date
+5) Create "input" tag with
+   1) Setup "type" as : "date"
+   2) Setup "id" as : "start-date"
+   3) Setup "name" as : "start-date"
+   4) Setup "className" as : {classNames.selectInput}
+   5) Setup "onChange" funciton as : (e) => setStartDate(e.target.value)
+
+###### Setup Frontend : Setup Expenses Page with "End Date" element
+
+1) Create "div" tag
+2) Create "label" tag with "htmlFor" as : "end-date"
+3) Create "className" for "label" tag as : {classNames.label}
+4) Create "label" text as : End Date
+5) Create "input" tag with
+   1) Setup "type" as : "date"
+   2) Setup "id" as : "end-date"
+   3) Setup "name" as : "end-date"
+   4) Setup "className" as : {classNames.selectInput}
+   5) Setup "onChange" funciton as : (e) => setEndDate(e.target.value)
+
+###### Setup Frontend : Setup Expenses Page with "Pie Chart" element
+
+1) Create "div" with "className" as : "flex-grow bg-white shadow rounded-lg p-4 md:p-6"
+2) Create "ResponsiveContainer" tag with 
+   1) Setup "widht" as : 100%
+   2) Setup "height" as : {400}
+3) Create "PieChart" tag with
+   1) Setup "Pie" tag with
+      1) Setup "data" as :
+      2) Setup "cs" as :
+      3) Setup "cy" as :
+      4) Setup "label" as : label
+      5) Setup "outerRadius" as : {150}
+      6) Setup "fill" as : "#8884d8"
+      7) Setup "dataKey" as : "amount"
+      8) Setup "onMouseEnter" as : (_, index) => setActiveIndex(index)
+   2) Mapping "aggregatedData" function with
+      1) Create "entry" function as : (entry: AggregatedDataItem, index: number) => (<Cell..>)
+      2) Create "Cell" tag with
+         1) Setup "key" as : {`cell-${index}`}
+         2) Setup "fill" as : {index === activeIndex ? "rgb(29, 78, 216)" : entry.color}
+4) 
