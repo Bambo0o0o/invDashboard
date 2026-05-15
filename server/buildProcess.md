@@ -1441,7 +1441,7 @@ git push -u origin main
 4) Setup "return" Object.values() as : filtered
 5) Setup output for "useMemo()" with : [expenses, selectedCategory, startDate, endDate]
 
-#### Setup Frontend : Setup Expenses page with "className" resuable
+#### Setup Frontend : Setup Expenses page with "className" ***Resuable***
 
 1) Create "className" with
    1) Setup "label" as : "block text-sm font-medium text-gray-700"
@@ -1526,4 +1526,5 @@ git push -u origin main
       2) Create "Cell" tag with
          1) Setup "key" as : {`cell-${index}`}
          2) Setup "fill" as : {index === activeIndex ? "rgb(29, 78, 216)" : entry.color}
-4) 
+
+Time Stamp : 05:30:17
