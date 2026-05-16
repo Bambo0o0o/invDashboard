@@ -1525,6 +1525,22 @@ git push -u origin main
       1) Create "entry" function as : (entry: AggregatedDataItem, index: number) => (<Cell..>)
       2) Create "Cell" tag with
          1) Setup "key" as : {`cell-${index}`}
-         2) Setup "fill" as : {index === activeIndex ? "rgb(29, 78, 216)" : entry.color}
+         2) Setup "fill" as : {index === activeIndex ? "rgb(29, 78, 216)" : entry.color}            
 
-Time Stamp : 05:30:17
+   ....Time Stamp : 05:42:3
+   0
+
+## Deploy to Cloud : AWS
+
+### Deploy to Cloud : SignUp and SignIn to AWS webservice
+
+1) Go to "AWS Web service" as : <https://aws.amazon.com/>
+2) SignUp and SighIn with any "email" and "password"
+3) Go to "AWS Console" as : <https://ap-southeast-2.console.aws.amazon.com/console/home?refid=011f28e3-1dfa-405d-894f-3e05b14038a6&region=ap-southeast-2>
+***Information for "Free Tier" : <https://aws.amazon.com/>***
+4) Go to "Billing and Co
+
+***Without credit card***
+TimeStamp : 05:56:48 ==> Trouble is No credit card cannot register even free tier
+Here trainning link : <>
+This trainning : "Brick when don't exist credit card"
